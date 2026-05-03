@@ -1,30 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light" data-lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achayans Fish World | Premium Fresh Fish – Palakkad</title>
+    <title>Achayans Fish World – Palakkad</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Pacifico&display=swap"
+        href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700;800&family=Noto+Sans+Malayalam:wght@300;400;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
+    <!-- Fallback: use system fonts if SF Pro not available -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Malayalam:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --teal: #0a6e67;
-            --teal-light: #14b8a6;
-            --teal-dark: #064e49;
+            /* Light theme */
+            --bg: #ffffff;
+            --bg2: #f5f5f7;
+            --bg3: #e8e8ed;
+            --surface: rgba(255, 255, 255, 0.72);
+            --surface2: rgba(245, 245, 247, 0.8);
+            --text: #1d1d1f;
+            --text2: #424245;
+            --text3: #6e6e73;
+            --text4: #86868b;
+            --accent: #0a6e67;
+            --accent2: #14b8a6;
             --gold: #d4a843;
-            --gold-light: #f0c96b;
-            --cream: #fdf6ec;
-            --dark: #0d1f1e;
-            --dark2: #122b29;
-            --white: #ffffff;
-            --text-muted: #6b7280;
+            --gold2: #f0c96b;
+            --green: #34c759;
+            --blue: #007aff;
+            --border: rgba(0, 0, 0, 0.08);
+            --border2: rgba(0, 0, 0, 0.12);
+            --shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            --shadow2: 0 8px 40px rgba(0, 0, 0, 0.12);
+            --shadow3: 0 24px 80px rgba(0, 0, 0, 0.14);
+            --wa: #25d366;
+            --nav-h: 56px;
+            --radius: 18px;
+            --radius2: 28px;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --font-ml: 'Noto Sans Malayalam', sans-serif;
+        }
+
+        .nav-logo-mark img {
+    height: 40px;   /* adjust as needed */
+    width: auto;
+    display: block;
+}
+
+        [data-theme="dark"] {
+            --bg: #000000;
+            --bg2: #111113;
+            --bg3: #1c1c1e;
+            --surface: rgba(28, 28, 30, 0.85);
+            --surface2: rgba(44, 44, 46, 0.85);
+            --text: #f5f5f7;
+            --text2: #d1d1d6;
+            --text3: #98989f;
+            --text4: #6e6e73;
+            --border: rgba(255, 255, 255, 0.08);
+            --border2: rgba(255, 255, 255, 0.13);
+            --shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            --shadow2: 0 8px 40px rgba(0, 0, 0, 0.6);
+            --shadow3: 0 24px 80px rgba(0, 0, 0, 0.7);
         }
 
         * {
@@ -35,312 +75,184 @@
 
         html {
             scroll-behavior: smooth;
+            font-size: 16px;
         }
 
         body {
-            /* font-family: 'DM Sans', sans-serif; */
-            font-family: 'Poppins', sans-serif !important;
-            background: var(--white);
-            color: var(--dark);
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
             overflow-x: hidden;
+            transition: background 0.4s ease, color 0.4s ease;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ===== CUSTOM CURSOR ===== */
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--gold);
-            border-radius: 50%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s;
+        [data-lang="ml"] .en {
+            display: none !important;
         }
 
-        .cursor-ring {
-            width: 36px;
-            height: 36px;
-            border: 2px solid rgba(212, 168, 67, 0.5);
-            border-radius: 50%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: all 0.15s ease;
+        [data-lang="en"] .ml {
+            display: none !important;
         }
 
-        /* ===== FLOATING BUBBLES ===== */
-        .bubbles-bg {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
+        [data-lang="ml"] {
+            font-family: var(--font-ml), var(--font);
         }
 
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(20, 184, 166, 0.12), rgba(10, 110, 103, 0.04));
-            border: 1px solid rgba(20, 184, 166, 0.08);
-            animation: floatBubble linear infinite;
+        [data-lang="ml"] .ml {
+            font-family: var(--font-ml);
         }
 
-        @keyframes floatBubble {
-            0% {
-                transform: translateY(110vh) scale(0.8);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 0.6;
-            }
-
-            100% {
-                transform: translateY(-20vh) scale(1.1);
-                opacity: 0;
-            }
-        }
-
-        /* ===== PAGE LOADER ===== */
-        #loader {
-            position: fixed;
-            inset: 0;
-            z-index: 10000;
-            background: var(--dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 20px;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
-        }
-
-        #loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loader-fish {
-            font-size: 52px;
-            animation: loaderFishSwim 1.2s ease-in-out infinite alternate;
-        }
-
-        @keyframes loaderFishSwim {
-            0% {
-                transform: translateX(-30px) scaleX(1);
-            }
-
-            100% {
-                transform: translateX(30px) scaleX(1);
-            }
-        }
-
-        .loader-bar {
-            width: 200px;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 99px;
-            overflow: hidden;
-        }
-
-        .loader-progress {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--teal-light), var(--gold));
-            border-radius: 99px;
-            animation: loaderProgress 1.8s ease-in-out forwards;
-        }
-
-        @keyframes loaderProgress {
-            0% {
-                width: 0%;
-            }
-
-            100% {
-                width: 100%;
-            }
-        }
-
-        .loader-text {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 13px;
-            letter-spacing: 3px;
-            /* font-family: 'DM Sans', sans-serif; */
-            text-transform: uppercase;
-        }
-
-        /* ===== HEADER ===== */
-        header {
+        /* ===== NAVBAR ===== */
+        #navbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100;
-            padding: 0 5%;
+            z-index: 1000;
+            height: var(--nav-h);
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            height: 72px;
-            transition: all 0.4s ease;
+            padding: 0 5%;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.4s ease, border-color 0.4s ease;
         }
 
-        header.scrolled {
-            background: rgba(13, 31, 30, 0.95);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            height: 60px;
+        [data-theme="dark"] #navbar {
+            background: rgba(0, 0, 0, 0.75);
         }
 
-        .logo {
+        .nav-logo {
             display: flex;
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            animation: fadeInLeft 0.8s ease 0.3s both;
         }
 
-        .logo-icon {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--teal), var(--gold));
-            border-radius: 12px;
+        .nav-logo-mark {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            box-shadow: 0 4px 15px rgba(10, 110, 103, 0.4);
-            animation: logoSpin 0s;
-            transition: transform 0.3s;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(10, 110, 103, 0.35);
         }
 
-        .logo:hover .logo-icon {
-            transform: rotate(15deg) scale(1.05);
-        }
-
-        .logo-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
+        .nav-logo-name {
+            font-size: 15px;
             font-weight: 700;
-            color: var(--white);
-            line-height: 1.1;
+            color: var(--text);
+            letter-spacing: -0.3px;
         }
 
-        .logo-text span {
-            color: var(--gold);
-            display: block;
-            font-size: 11px;
-            font-weight: 400;
-            letter-spacing: 2px;
-            /* font-family: 'DM Sans', sans-serif; */
-            text-transform: uppercase;
-        }
-
-        nav {
+        .nav-center {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 24px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            letter-spacing: 0.5px;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: width 0.3s ease;
-            border-radius: 2px;
+            color: var(--text3);
+            text-decoration: none;
+            letter-spacing: -0.1px;
+            transition: color 0.2s;
         }
 
         .nav-link:hover {
-            color: var(--gold);
+            color: var(--accent);
         }
 
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .nav-social {
+        .nav-right {
+            margin-left: auto;
             display: flex;
+            align-items: center;
             gap: 8px;
-            margin-left: 16px;
-            padding-left: 20px;
-            border-left: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        .nav-social a {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+        .nav-pill-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 7px 13px;
+            border-radius: 99px;
+            border: 1px solid var(--border2);
+            background: var(--surface2);
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.2px;
+        }
+
+        .nav-pill-btn:hover {
+            background: var(--bg3);
+            transform: scale(1.03);
+        }
+
+        .theme-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--border2);
+            background: var(--surface2);
+            color: var(--text);
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(255, 255, 255, 0.7);
             font-size: 15px;
-            text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
-        .nav-social a:hover {
-            background: var(--gold);
-            border-color: var(--gold);
-            color: var(--dark);
-            transform: translateY(-2px);
+        .theme-btn:hover {
+            transform: scale(1.1);
         }
 
-        .mobile-toggle {
+        .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            color: white;
-            font-size: 26px;
+            color: var(--text);
+            font-size: 22px;
             cursor: pointer;
+            padding: 4px;
         }
 
+        /* ===== MOBILE NAV ===== */
         .mobile-nav {
             display: none;
             position: fixed;
-            top: 60px;
+            top: var(--nav-h);
             left: 0;
             right: 0;
-            background: rgba(13, 31, 30, 0.98);
-            backdrop-filter: blur(20px);
-            padding: 24px;
-            z-index: 99;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--surface);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 5%;
             flex-direction: column;
-            gap: 16px;
-            animation: slideDown 0.3s ease;
+            gap: 2px;
+            z-index: 999;
+            animation: slideInNav 0.25s ease;
         }
 
         .mobile-nav.open {
             display: flex;
         }
 
-        @keyframes slideDown {
+        @keyframes slideInNav {
             from {
                 opacity: 0;
                 transform: translateY(-10px);
@@ -353,271 +265,355 @@
         }
 
         .mobile-nav a {
-            color: rgba(255, 255, 255, 0.85);
+            display: block;
+            padding: 12px 16px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text2);
             text-decoration: none;
-            font-size: 16px;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+            transition: background 0.2s;
         }
 
-        /* ===== HERO SECTION ===== */
-        #home {
+        .mobile-nav a:hover {
+            background: var(--bg3);
+        }
+
+        /* ===== HERO ===== */
+        #hero {
             min-height: 100vh;
-            background: var(--dark);
-            position: relative;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            overflow: hidden;
-        }
-
-        .hero-bg-img {
-            position: absolute;
-            inset: 0;
-            background: url('images/catch-of-the-day-life-at-alappuzha-1727359820_43a9d7a456940ab395c2.webp') center/cover no-repeat;
-            animation: heroPan 20s ease-in-out infinite alternate;
-        }
-
-        @keyframes heroPan {
-            0% {
-                transform: scale(1.05) translateX(-2%);
-            }
-
-            100% {
-                transform: scale(1.08) translateX(2%);
-            }
-        }
-
-        .hero-gradient {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(6, 78, 73, 0.85) 0%, rgba(13, 31, 30, 0.7) 50%, rgba(0, 0, 0, 0.6) 100%);
-        }
-
-        .hero-waves {
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-        }
-
-        .hero-content {
+            justify-content: center;
+            text-align: center;
+            padding: 120px 5% 60px;
             position: relative;
-            z-index: 10;
-            max-width: 780px;
-            padding: 0 5%;
-            padding-top: 80px;
+            overflow: hidden;
+            background: var(--bg);
         }
 
-        .hero-badge {
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.18;
+            pointer-events: none;
+        }
+
+        .hero-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #0a6e67, transparent);
+            top: -100px;
+            left: -100px;
+        }
+
+        .hero-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #d4a843, transparent);
+            bottom: -50px;
+            right: -100px;
+        }
+
+        .hero-orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #14b8a6, transparent);
+            top: 40%;
+            left: 40%;
+        }
+
+        [data-theme="dark"] .hero-orb {
+            opacity: 0.22;
+        }
+
+        .hero-eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(212, 168, 67, 0.15);
-            border: 1px solid rgba(212, 168, 67, 0.35);
-            color: var(--gold-light);
-            padding: 7px 16px;
+            gap: 6px;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
             border-radius: 99px;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
             margin-bottom: 28px;
-            animation: fadeInUp 0.7s ease 0.5s both;
+            position: relative;
+            z-index: 1;
+            animation: fadeUp 0.7s ease 0.2s both;
         }
 
-        .hero-badge-dot {
-            width: 8px;
-            height: 8px;
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
             border-radius: 50%;
-            background: var(--gold);
-            animation: pulse 2s infinite;
+            animation: blink 2s infinite;
         }
 
-        @keyframes pulse {
+        @keyframes blink {
 
             0%,
             100% {
-                box-shadow: 0 0 0 0 rgba(212, 168, 67, 0.6);
+                opacity: 1;
             }
 
             50% {
-                box-shadow: 0 0 0 6px rgba(212, 168, 67, 0);
+                opacity: 0.3;
             }
         }
 
         .hero-title {
-            /* font-family: 'Playfair Display', serif; */
-            font-size: clamp(42px, 7vw, 82px);
-            font-weight: 900;
-            color: var(--white);
-            line-height: 1.05;
-            margin-bottom: 24px;
-            animation: fadeInUp 0.8s ease 0.7s both;
-        }
-
-        .hero-title .accent {
-            color: var(--gold);
-            font-style: italic;
+            font-size: clamp(44px, 8vw, 96px);
+            font-weight: 800;
+            letter-spacing: -2.5px;
+            line-height: 1.02;
+            color: var(--text);
+            max-width: 900px;
             position: relative;
+            z-index: 1;
+            animation: fadeUp 0.8s ease 0.35s both;
         }
 
-        .hero-title .accent::after {
-            content: '';
-            position: absolute;
-            bottom: 4px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--gold), transparent);
-            border-radius: 2px;
+        .hero-title .brand {
+            background: linear-gradient(135deg, var(--accent), var(--accent2), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .hero-desc {
-            color: rgba(255, 255, 255, 0.75);
-            font-size: 17px;
-            line-height: 1.7;
-            max-width: 540px;
-            margin-bottom: 40px;
-            animation: fadeInUp 0.8s ease 0.9s both;
+        .hero-sub {
+            font-size: clamp(16px, 2vw, 20px);
+            font-weight: 400;
+            color: var(--text3);
+            max-width: 560px;
+            line-height: 1.65;
+            margin: 20px auto 40px;
+            letter-spacing: -0.2px;
+            position: relative;
+            z-index: 1;
+            animation: fadeUp 0.8s ease 0.5s both;
         }
 
-        .hero-btns {
+        .hero-ctas {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 50px;
-            animation: fadeInUp 0.8s ease 1.1s both;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeUp 0.8s ease 0.65s both;
         }
 
-        .btn-primary {
+        .cta-primary {
             display: inline-flex;
             align-items: center;
-            gap: 9px;
-            background-color: rgb(14, 124, 14);
-            color: var(--white);
+            gap: 8px;
+            background: var(--wa);
+            color: #fff;
+            font-size: 15px;
             font-weight: 700;
-            font-size: 15px;
             padding: 14px 28px;
-            border-radius: 12px;
+            border-radius: 99px;
             text-decoration: none;
-            box-shadow: 0 8px 25px rgba(212, 168, 67, 0.4);
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
+            box-shadow: 0 8px 28px rgba(37, 211, 102, 0.4);
+            letter-spacing: -0.3px;
+            transition: all 0.25s ease;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 14px 35px rgba(212, 168, 67, 0.5);
+        .cta-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 14px 40px rgba(37, 211, 102, 0.5);
         }
 
-        .btn-secondary {
+        .cta-secondary {
             display: inline-flex;
             align-items: center;
-            gap: 9px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1.5px solid rgba(255, 255, 255, 0.3);
-            color: var(--white);
-            font-weight: 600;
+            gap: 8px;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            color: var(--text);
             font-size: 15px;
+            font-weight: 600;
             padding: 14px 28px;
-            border-radius: 12px;
+            border-radius: 99px;
             text-decoration: none;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            letter-spacing: -0.3px;
+            transition: all 0.25s ease;
         }
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.18);
-            border-color: var(--gold);
-            color: var(--gold);
-            transform: translateY(-3px);
+        .cta-secondary:hover {
+            background: var(--bg3);
+            transform: translateY(-2px);
         }
 
-        .hero-stats {
+        /* Hero stats strip */
+        .hero-stats-strip {
             display: flex;
-            gap: 36px;
-            animation: fadeInUp 0.8s ease 1.3s both;
-            margin-bottom: 14%;
+            gap: 0;
+            margin-top: 72px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius2);
+            overflow: hidden;
+            max-width: 540px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            animation: fadeUp 0.8s ease 0.8s both;
         }
 
         .hero-stat {
-            display: flex;
-            flex-direction: column;
+            flex: 1;
+            padding: 20px 16px;
+            text-align: center;
+            position: relative;
         }
 
-        .hero-stat-num {
-            /* font-family: 'Playfair Display', serif; */
+        .hero-stat+.hero-stat::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20%;
+            bottom: 20%;
+            width: 1px;
+            background: var(--border2);
+        }
+
+        .stat-num {
             font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--text);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text4);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* Hero visual */
+        .hero-visual {
+            position: relative;
+            z-index: 1;
+            margin-top: 64px;
+            width: 100%;
+            max-width: 900px;
+            animation: fadeUp 0.9s ease 0.95s both;
+        }
+
+        .hero-img-wrap {
+            width: 100%;
+            height: 480px;
+            border-radius: var(--radius2);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow3);
+            border: 1px solid var(--border);
+        }
+
+        .hero-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 60%);
+        }
+
+        .hero-img-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-img-badge2 {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: #fff;
+            padding: 7px 14px;
+            border-radius: 99px;
+            font-size: 12px;
             font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== SECTION COMMONS ===== */
+        section {
+            padding: 100px 5%;
+        }
+
+        .s-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(10, 110, 103, 0.08);
+            border: 1px solid rgba(10, 110, 103, 0.15);
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 99px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .s-title {
+            font-size: clamp(30px, 4.5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.08;
+            color: var(--text);
+        }
+
+        .s-title .accent {
+            color: var(--accent);
+        }
+
+        .s-title .gold {
             color: var(--gold);
         }
 
-        .hero-stat-label {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.55);
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .s-desc {
+            font-size: 17px;
+            color: var(--text3);
+            line-height: 1.7;
+            max-width: 560px;
+            font-weight: 400;
+            letter-spacing: -0.2px;
         }
 
-        /* Fish swimming animation in hero */
-        .hero-fish-swim {
-            position: absolute;
-            right: 5%;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 120px;
-            opacity: 0.08;
-            animation: heroFishFloat 8s ease-in-out infinite;
-            z-index: 1;
-        }
-
-        @keyframes heroFishFloat {
-
-            0%,
-            100% {
-                transform: translateY(-50%) rotate(-5deg);
-            }
-
-            50% {
-                transform: translateY(-55%) rotate(5deg);
-            }
-        }
-
-        /* ===== SCROLL ANIMATIONS ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .reveal-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .reveal-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        @keyframes fadeInUp {
+        @keyframes fadeUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -629,302 +625,396 @@
             }
         }
 
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
         }
 
-        /* ===== SECTION STYLES ===== */
-        .section-tag {
-            display: inline-flex;
+        .reveal.vis {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* ===== TRUST BAR ===== */
+        #trust {
+            padding: 40px 5%;
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .trust-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(10, 110, 103, 0.1);
-            border: 1px solid rgba(10, 110, 103, 0.2);
-            color: var(--teal);
-            padding: 6px 16px;
-            border-radius: 99px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trust-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .trust-text strong {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.2px;
+        }
+
+        .trust-text span {
             font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            /* font-family: 'Playfair Display', serif; */
-            font-size: clamp(30px, 4vw, 48px);
-            font-weight: 900;
-            line-height: 1.15;
-            color: var(--dark);
-            margin-bottom: 16px;
-        }
-
-        .section-title .gold {
-            color: var(--teal);
-        }
-
-        .section-line {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--teal), var(--gold));
-            border-radius: 3px;
-            margin: 0 auto 20px;
-        }
-
-        .section-line.left {
-            margin: 0 0 20px;
+            color: var(--text4);
         }
 
         /* ===== ABOUT ===== */
         #about {
-            padding: 100px 5%;
-            background: var(--cream);
+            background: var(--bg);
         }
 
-        .about-grid {
+        .about-inner {
+            max-width: 1200px;
+            margin: 60px auto 0;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 64px;
             align-items: center;
-            max-width: 1200px;
-            margin: 60px auto 0;
         }
 
-        .about-img-wrap {
+        .about-img-col {
             position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
         }
 
-        .about-img-wrap img {
+        .about-main-img {
             width: 100%;
-            height: 450px;
+            height: 520px;
+            border-radius: var(--radius2);
             object-fit: cover;
             display: block;
-            transition: transform 0.6s ease;
+            box-shadow: var(--shadow3);
+            border: 1px solid var(--border);
         }
 
-        .about-img-wrap:hover img {
-            transform: scale(1.04);
-        }
-
-        .about-img-badge {
+        .about-float-card {
             position: absolute;
-            bottom: 24px;
-            left: 24px;
-            background: rgba(13, 31, 30, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 168, 67, 0.3);
-            color: white;
-            padding: 14px 20px;
-            border-radius: 16px;
-            display: flex;
-            flex-direction: column;
+            bottom: -24px;
+            right: -20px;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            box-shadow: var(--shadow2);
+            min-width: 180px;
         }
 
-        .about-img-badge-num {
-            /* font-family: 'Playfair Display', serif; */
-            font-size: 32px;
-            color: var(--gold);
-            font-weight: 700;
+        .float-num {
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            color: var(--accent);
         }
 
-        .about-img-badge-txt {
+        .float-label {
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.65);
+            color: var(--text4);
+            font-weight: 500;
         }
 
-        .about-features {
+        .about-feat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 10px;
             margin: 28px 0;
         }
 
-        .about-feat {
+        .feat-pill {
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: white;
-            padding: 14px 16px;
+            gap: 10px;
+            background: var(--bg2);
+            border: 1px solid var(--border);
             border-radius: 14px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
+            padding: 12px 14px;
+            transition: all 0.25s ease;
         }
 
-        .about-feat:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(10, 110, 103, 0.12);
+        .feat-pill:hover {
+            background: var(--bg3);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
-        .about-feat-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, rgba(10, 110, 103, 0.12), rgba(10, 110, 103, 0.06));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--teal);
-            font-size: 18px;
+        .feat-pill-icon {
+            font-size: 20px;
         }
 
-        .about-quote {
-            background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+        .feat-pill-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text2);
+            letter-spacing: -0.2px;
+        }
+
+        .about-quote-card {
+            background: linear-gradient(135deg, var(--accent), #0d8f87);
+            border-radius: var(--radius);
             padding: 22px 24px;
-            border-radius: 16px;
-            color: white;
-            margin-top: 12px;
+            color: #fff;
             position: relative;
             overflow: hidden;
         }
 
-        .about-quote::before {
+        .about-quote-card::before {
             content: '"';
             position: absolute;
-            top: -10px;
-            left: 16px;
-            font-size: 100px;
+            top: -20px;
+            left: 14px;
+            font-size: 120px;
+            font-weight: 900;
             color: rgba(255, 255, 255, 0.08);
-            /* font-family: 'Playfair Display', serif; */
             line-height: 1;
         }
 
-        .about-quote p {
-            position: relative;
-            font-size: 15px;
-            line-height: 1.65;
+        .about-quote-card p {
+            font-size: 14px;
+            line-height: 1.7;
+            opacity: 0.92;
             font-style: italic;
-            opacity: 0.9;
+            position: relative;
         }
 
-        .about-quote strong {
+        .about-quote-card strong {
             display: block;
             margin-top: 12px;
-            font-size: 14px;
-            opacity: 0.7;
+            font-size: 12px;
+            opacity: 0.65;
             font-style: normal;
+            font-weight: 600;
+        }
+
+        /* ===== FEATURES BENTO ===== */
+        #features {
+            background: var(--bg2);
+        }
+
+        .features-header {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .features-header .s-desc {
+            margin: 12px auto 0;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+            gap: 16px;
+            max-width: 1100px;
+            margin: 56px auto 0;
+        }
+
+        .bento-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius2);
+            padding: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow2);
+            border-color: var(--border2);
+        }
+
+        .bento-card.wide {
+            grid-column: span 2;
+        }
+
+        .bento-card.tall {
+            grid-row: span 2;
+        }
+
+        .bento-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 18px;
+        }
+
+        .bento-icon.teal {
+            background: rgba(10, 110, 103, 0.1);
+        }
+
+        .bento-icon.gold {
+            background: rgba(212, 168, 67, 0.12);
+        }
+
+        .bento-icon.green {
+            background: rgba(52, 199, 89, 0.1);
+        }
+
+        .bento-icon.blue {
+            background: rgba(0, 122, 255, 0.1);
+        }
+
+        .bento-title {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .bento-desc {
+            font-size: 14px;
+            color: var(--text3);
+            line-height: 1.65;
+            font-weight: 400;
+        }
+
+        .bento-metric {
+            margin-top: 24px;
+            font-size: 40px;
+            font-weight: 800;
+            letter-spacing: -2px;
+            color: var(--accent);
+        }
+
+        .bento-metric span {
+            font-size: 16px;
+            letter-spacing: -0.5px;
+            font-weight: 600;
+        }
+
+        .bento-visual {
+            width: 100%;
+            height: 160px;
+            border-radius: 14px;
+            object-fit: cover;
+            margin-top: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .bento-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 16px;
+        }
+
+        .bento-tag {
+            background: rgba(10, 110, 103, 0.1);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 99px;
+            letter-spacing: 0.2px;
         }
 
         /* ===== GALLERY ===== */
         #gallery {
-            padding: 100px 5%;
-            background: var(--dark);
+            background: var(--bg);
         }
 
-        #gallery .section-title {
-            color: var(--white);
-        }
-
-        #gallery .section-tag {
-            background: rgba(212, 168, 67, 0.12);
-            border-color: rgba(212, 168, 67, 0.25);
-            color: var(--gold);
-        }
-
-        .gallery-header {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto 48px;
-        }
-
-        .gallery-nav-row {
+        .gallery-hd {
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: space-between;
-            margin-bottom: 20px;
-            max-width: 1300px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 4px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .gallery-nav-row .hint {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .gallery-nav-btns {
+        .g-nav-btns {
             display: flex;
             gap: 8px;
         }
 
         .g-nav-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg2);
+            border: 1px solid var(--border2);
+            color: var(--text);
+            font-size: 18px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .g-nav-btn:hover {
-            background: var(--gold);
-            border-color: var(--gold);
-            color: var(--dark);
-            transform: scale(1.05);
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
         }
 
-        .gallery-track {
+        .gallery-scroll {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             overflow-x: auto;
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             cursor: grab;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding-bottom: 8px;
+            margin-top: 36px;
+            padding-bottom: 4px;
         }
 
-        .gallery-track::-webkit-scrollbar {
+        .gallery-scroll::-webkit-scrollbar {
             display: none;
         }
 
-        .gallery-track:active {
+        .gallery-scroll:active {
             cursor: grabbing;
         }
 
         .g-card {
-            flex: 0 0 230px;
-            height: 400px;
+            flex: 0 0 220px;
+            height: 360px;
             border-radius: 20px;
             overflow: hidden;
             position: relative;
-            background: #111;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-            cursor: pointer;
-        }
-
-        @media (min-width: 768px) {
-            .g-card {
-                flex: 0 0 260px;
-            }
+            background: var(--bg3);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .g-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 24px 60px rgba(20, 184, 166, 0.2);
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: var(--shadow2);
         }
 
         .g-card video,
@@ -933,550 +1023,714 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.5s ease;
         }
 
-        .g-card:hover video,
-        .g-card:hover img {
-            transform: scale(1.06);
-        }
-
-        .g-card-overlay {
+        .g-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, transparent 55%);
         }
 
-        .g-card-top {
+        .g-label {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            display: flex;
-            gap: 6px;
-        }
-
-        .g-insta {
-            width: 30px;
-            height: 30px;
+            bottom: 14px;
+            left: 14px;
             background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 14px;
-        }
-
-        .g-card-bottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 20px 14px 16px;
-        }
-
-        .g-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
+            color: #fff;
             font-size: 11px;
-            font-weight: 600;
-            padding: 5px 12px;
-            border-radius: 99px;
-            letter-spacing: 0.5px;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 8px;
+            letter-spacing: 0.3px;
         }
 
         .gallery-cta {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 36px;
         }
 
         .insta-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
-            color: white;
+            color: #fff;
+            font-size: 14px;
             font-weight: 700;
-            font-size: 15px;
-            padding: 14px 32px;
-            border-radius: 14px;
+            padding: 13px 28px;
+            border-radius: 99px;
             text-decoration: none;
-            box-shadow: 0 8px 30px rgba(253, 29, 29, 0.3);
-            transition: all 0.3s;
+            box-shadow: 0 6px 24px rgba(253, 29, 29, 0.3);
+            transition: all 0.25s;
         }
 
         .insta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 14px 40px rgba(253, 29, 29, 0.4);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 36px rgba(253, 29, 29, 0.4);
         }
 
-        /* ===== FISH VARIETIES ===== */
-        #fish-varieties {
-            padding: 100px 5%;
-            background: var(--cream);
+        /* ===== VARIETIES ===== */
+        #varieties {
+            background: var(--bg2);
+        }
+
+        .varieties-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .varieties-header .s-desc {
+            margin: 12px auto 0;
         }
 
         .varieties-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-            max-width: 1200px;
-            margin: 60px auto 0;
+            gap: 20px;
+            max-width: 1100px;
+            margin: 56px auto 0;
         }
 
         .fish-card {
-            background: white;
-            border-radius: 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius2);
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .fish-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 24px 60px rgba(10, 110, 103, 0.15);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow2);
         }
 
-        .fish-card-img-wrap {
-            position: relative;
-            overflow: hidden;
-            height: 230px;
-        }
-
-        .fish-card-img-wrap img {
+        .fish-img {
             width: 100%;
-            height: 100%;
+            height: 200px;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            display: block;
+            background: var(--bg3);
         }
 
-        .fish-card:hover .fish-card-img-wrap img {
-            transform: scale(1.08);
+        .fish-img-placeholder {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            background: linear-gradient(135deg, var(--bg2), var(--bg3));
         }
 
-        .fish-card-badge {
-            position: absolute;
-            top: 14px;
-            left: 14px;
-            background: var(--teal);
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 5px 12px;
-            border-radius: 99px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .fish-card-body {
+        .fish-body {
             padding: 22px;
         }
 
-        .fish-card-body h3 {
-            /* font-family: 'Playfair Display', serif; */
-            font-size: 22px;
+        .fish-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(10, 110, 103, 0.1);
+            color: var(--accent);
+            font-size: 11px;
             font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 99px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .fish-name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text);
             margin-bottom: 8px;
         }
 
-        .fish-card-body p {
-            color: var(--text-muted);
-            font-size: 14px;
+        .fish-desc {
+            font-size: 13px;
+            color: var(--text3);
             line-height: 1.6;
             margin-bottom: 18px;
         }
 
-        .fish-card-footer {
+        .fish-footer {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
 
         .fish-price {
             font-size: 22px;
-            font-weight: 700;
-            color: var(--teal);
-            /* font-family: 'Playfair Display', serif; */
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            color: var(--accent);
         }
 
-        .fish-price span {
+        .fish-price small {
             font-size: 13px;
-            color: var(--text-muted);
-            /* font-family: 'DM Sans', sans-serif; */
             font-weight: 400;
+            color: var(--text4);
         }
 
         .order-btn {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: linear-gradient(135deg, var(--teal), var(--teal-light));
-            color: white;
-            text-decoration: none;
+            gap: 5px;
+            background: var(--wa);
+            color: #fff;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             padding: 10px 18px;
-            border-radius: 10px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 14px rgba(10, 110, 103, 0.3);
+            border-radius: 99px;
+            text-decoration: none;
+            transition: all 0.25s;
         }
 
         .order-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(10, 110, 103, 0.4);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
         }
 
         .varieties-note {
             text-align: center;
-            margin-top: 32px;
+            margin-top: 28px;
         }
 
         .varieties-note p {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(10, 110, 103, 0.08);
-            border: 1px solid rgba(10, 110, 103, 0.15);
-            color: var(--teal);
-            padding: 12px 24px;
-            border-radius: 99px;
-            font-size: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text3);
+            font-size: 13px;
             font-weight: 500;
+            padding: 12px 20px;
+            border-radius: 99px;
         }
 
-        /* ===== TESTIMONIALS ===== */
-        #testimonials {
-            padding: 100px 5%;
-            background: white;
+        /* ===== HOW IT WORKS ===== */
+        #howitworks {
+            background: var(--bg);
         }
 
-        .testimonials-inner {
-            max-width: 1200px;
+        .how-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .how-header .s-desc {
+            margin: 12px auto 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1100px;
             margin: 60px auto 0;
         }
 
-        .swiper-pagination-bullet-active {
-            background: var(--teal) !important;
+        .step-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius2);
+            padding: 28px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .t-card {
-            background: var(--cream);
-            border-radius: 24px;
-            padding: 28px;
-            margin: 4px 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.35s ease;
-            border: 1px solid rgba(10, 110, 103, 0.06);
-        }
-
-        .t-card:hover {
+        .step-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 50px rgba(10, 110, 103, 0.1);
-            border-color: rgba(10, 110, 103, 0.12);
+            box-shadow: var(--shadow2);
         }
 
-        .t-stars {
-            color: #f59e0b;
+        .step-num {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 40px;
+            font-weight: 900;
+            color: var(--border2);
+            line-height: 1;
+            letter-spacing: -2px;
+            user-select: none;
+        }
+
+        .step-emoji {
+            font-size: 44px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .step-title {
             font-size: 16px;
-            margin-bottom: 14px;
-            display: flex;
-            gap: 2px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
         }
 
-        .t-text {
-            color: #374151;
+        .step-desc {
+            font-size: 13px;
+            color: var(--text3);
+            line-height: 1.6;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        #reviews {
+            background: var(--bg2);
+        }
+
+        .reviews-header {
+            text-align: center;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .reviews-header .s-desc {
+            margin: 12px auto 0;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 1100px;
+            margin: 56px auto 0;
+        }
+
+        .review-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius2);
+            padding: 26px;
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow2);
+        }
+
+        .review-stars {
             font-size: 15px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: var(--text2);
             line-height: 1.7;
             font-style: italic;
             margin-bottom: 20px;
         }
 
-        .t-author {
+        .review-author {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .t-avatar {
-            width: 46px;
-            height: 46px;
+        .r-avatar {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--teal), var(--teal-light));
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 18px;
+            font-size: 16px;
+            color: #fff;
+            flex-shrink: 0;
         }
 
-        .t-author-name {
+        .r-name {
+            font-size: 14px;
             font-weight: 700;
-            font-size: 15px;
+            color: var(--text);
         }
 
-        .t-author-role {
-            font-size: 13px;
-            color: var(--text-muted);
+        .r-role {
+            font-size: 12px;
+            color: var(--text4);
         }
 
         /* ===== CONTACT ===== */
         #contact {
-            padding: 100px 5%;
-            background: var(--dark);
+            background: var(--bg);
         }
 
-        #contact .section-title {
-            color: white;
-        }
-
-        #contact .section-tag {
-            background: rgba(212, 168, 67, 0.1);
-            border-color: rgba(212, 168, 67, 0.25);
-            color: var(--gold);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            max-width: 1200px;
+        .contact-inner {
+            /* max-width: 1100px; */
             margin: 60px auto 0;
+            /* display: grid; */
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
         }
 
-        .contact-info-item {
+        .contact-info-cards {
             display: flex;
-            gap: 14px;
-            margin-bottom: 20px;
-            align-items: flex-start;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .contact-info-icon {
+        .info-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            transition: all 0.25s;
+        }
+
+        .info-card:hover {
+            border-color: var(--border2);
+            box-shadow: var(--shadow);
+        }
+
+        .info-icon {
             width: 42px;
             height: 42px;
-            background: rgba(212, 168, 67, 0.12);
-            border: 1px solid rgba(212, 168, 67, 0.2);
+            background: rgba(10, 110, 103, 0.1);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--gold);
             font-size: 18px;
             flex-shrink: 0;
         }
 
-        .contact-info-text strong {
-            color: white;
-            display: block;
-            font-size: 14px;
-            margin-bottom: 2px;
-        }
-
-        .contact-info-text span {
-            color: rgba(255, 255, 255, 0.55);
-            font-size: 14px;
-        }
-
-        .contact-social {
-            display: flex;
-            gap: 12px;
-            margin: 28px 0;
-        }
-
-        .c-social-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-size: 13px;
+        .info-label {
+            font-size: 12px;
+            color: var(--text4);
             font-weight: 600;
-            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .c-social-btn:hover {
-            transform: translateY(-3px);
+        .info-val {
+            font-size: 14px;
+            color: var(--text2);
+            font-weight: 500;
+            margin-top: 3px;
+            line-height: 1.5;
         }
 
-        .c-social-fb {
+        .social-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+
+        .soc-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 10px 18px;
+            border-radius: 99px;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .soc-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .soc-fb {
             background: #1877f2;
-            color: white;
+            color: #fff;
         }
 
-        .c-social-ig {
+        .soc-ig {
             background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
-            color: white;
+            color: #fff;
         }
 
-        .c-social-wa {
-            background: #25d366;
-            color: white;
+        .soc-wa {
+            background: var(--wa);
+            color: #fff;
         }
 
         .map-wrap {
-            border-radius: 16px;
+            border-radius: var(--radius);
             overflow: hidden;
-            margin-top: 24px;
+            border: 1px solid var(--border);
+            margin-top: 4px;
         }
 
         .map-wrap iframe {
             width: 100%;
-            height: 200px;
+            height: 180px;
             border: none;
             display: block;
         }
 
-        .contact-form {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
+        .contact-form-wrap {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius2);
             padding: 36px;
         }
 
-        .contact-form h3 {
-            /* font-family: 'Playfair Display', serif; */
-            color: white;
-            font-size: 26px;
+        .form-title {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            color: var(--text);
             margin-bottom: 24px;
         }
 
-        .form-input {
+        .form-field {
             width: 100%;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 14px 16px;
-            border-radius: 12px;
-            /* font-family: 'DM Sans', sans-serif; */
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 13px 16px;
+            border-radius: 14px;
             font-size: 15px;
-            margin-bottom: 14px;
-            transition: all 0.3s;
+            font-family: var(--font);
+            margin-bottom: 12px;
             outline: none;
+            transition: all 0.2s;
         }
 
-        .form-input::placeholder {
-            color: rgba(255, 255, 255, 0.35);
+        .form-field::placeholder {
+            color: var(--text4);
         }
 
-        .form-input:focus {
-            border-color: var(--teal-light);
-            background: rgba(20, 184, 166, 0.06);
-            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+        .form-field:focus {
+            border-color: var(--accent);
+            background: var(--bg);
+            box-shadow: 0 0 0 3px rgba(10, 110, 103, 0.1);
         }
 
         .form-submit {
             width: 100%;
-            background: linear-gradient(135deg, var(--gold), #e8b84b);
-            color: var(--dark);
+            background: var(--accent);
+            color: #fff;
             border: none;
             padding: 15px;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            /* font-family: 'DM Sans', sans-serif; */
-            transition: all 0.3s;
+            font-family: var(--font);
+            letter-spacing: -0.3px;
+            transition: all 0.25s;
         }
 
         .form-submit:hover {
+            background: #0d8f87;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 168, 67, 0.4);
+            box-shadow: 0 8px 24px rgba(10, 110, 103, 0.3);
         }
 
         .form-note {
             text-align: center;
-            color: rgba(255, 255, 255, 0.35);
+            color: var(--text4);
             font-size: 12px;
             margin-top: 10px;
         }
 
+        /* ===== CTA BANNER ===== */
+        #ctabanner {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, var(--accent) 0%, #0d8f87 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #ctabanner::before {
+            content: '🐟';
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.06;
+            top: 50%;
+            left: -40px;
+            transform: translateY(-50%);
+        }
+
+        #ctabanner::after {
+            content: '🐠';
+            position: absolute;
+            font-size: 180px;
+            opacity: 0.06;
+            top: 50%;
+            right: -30px;
+            transform: translateY(-50%) scaleX(-1);
+        }
+
+        .cta-title {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .cta-sub {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 36px;
+            font-weight: 400;
+        }
+
+        .cta-btns {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-wa {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            color: var(--accent);
+            font-size: 15px;
+            font-weight: 800;
+            padding: 14px 28px;
+            border-radius: 99px;
+            text-decoration: none;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+            transition: all 0.25s;
+            letter-spacing: -0.3px;
+        }
+
+        .cta-wa:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-call {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 99px;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .cta-call:hover {
+            background: rgba(255, 255, 255, 0.22);
+            transform: translateY(-2px);
+        }
+
         /* ===== FOOTER ===== */
         footer {
-            background: #070f0f;
-            padding: 28px 5%;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            padding: 32px 5%;
         }
 
-        footer p {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 13px;
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
-        footer span {
-            color: var(--gold);
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
         }
 
-        /* ===== BACK TO TOP ===== */
-        #back-top {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, var(--teal), var(--teal-light));
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 20px;
+        .footer-brand-mark {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 24px rgba(10, 110, 103, 0.4);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s;
-            z-index: 50;
-            transform: translateY(10px);
+            font-size: 15px;
         }
 
-        #back-top.show {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateY(0);
+        .footer-brand-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
         }
 
-        #back-top:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 14px 32px rgba(10, 110, 103, 0.5);
+        .footer-copy {
+            font-size: 12px;
+            color: var(--text4);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-links a {
+            font-size: 12px;
+            color: var(--text4);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
         }
 
         /* ===== WHATSAPP FLOAT ===== */
         .wa-float {
             position: fixed;
-            bottom: 28px;
-            left: 28px;
+            bottom: 24px;
+            left: 24px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: #25d366;
-            color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 14px;
+            gap: 8px;
+            background: var(--wa);
+            color: #fff;
             font-size: 14px;
-            font-weight: 600;
-            box-shadow: 0 8px 28px rgba(37, 211, 102, 0.4);
-            z-index: 50;
-            animation: waFloat 3s ease-in-out infinite;
-            transition: all 0.3s;
+            font-weight: 700;
+            padding: 12px 20px;
+            border-radius: 99px;
+            text-decoration: none;
+            box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45);
+            z-index: 500;
+            animation: bobWa 3s ease-in-out infinite;
+            transition: all 0.25s;
+            letter-spacing: -0.3px;
         }
 
         .wa-float:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 36px rgba(37, 211, 102, 0.5);
             animation: none;
+            transform: scale(1.05);
+            box-shadow: 0 10px 36px rgba(37, 211, 102, 0.55);
         }
 
-        @keyframes waFloat {
+        @keyframes bobWa {
 
             0%,
             100% {
@@ -1488,20 +1742,55 @@
             }
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 900px) {
+        /* ===== BACK TO TOP ===== */
+        #btt {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            color: var(--text);
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow2);
+            z-index: 500;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: all 0.3s;
+        }
 
-            nav .nav-link,
-            .nav-social {
+        #btt.show {
+            opacity: 1;
+            pointer-events: all;
+            transform: none;
+        }
+
+        #btt:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 960px) {
+            .nav-center {
                 display: none;
             }
 
-            .mobile-toggle {
+            .mobile-menu-btn {
                 display: block;
             }
 
-            .about-grid,
-            .contact-grid {
+            .about-inner,
+            .contact-inner {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
@@ -1510,628 +1799,1044 @@
                 grid-template-columns: 1fr 1fr;
             }
 
-            .hero-fish-swim {
-                display: none;
+            .steps-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .bento-card.wide {
+                grid-column: span 1;
             }
         }
 
         @media (max-width: 600px) {
+            section {
+                padding: 72px 5%;
+            }
+
             .varieties-grid {
                 grid-template-columns: 1fr;
             }
 
-            .hero-stats {
-                gap: 20px;
+            .steps-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
             }
 
-            .hero-btns {
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats-strip {
                 flex-direction: column;
             }
 
-            .contact-social {
-                flex-wrap: wrap;
+            .hero-stat+.hero-stat::before {
+                display: none;
             }
-        }
 
-        /* ===== ANIMATED NUMBER COUNTER ===== */
-        .count-num {
-            display: inline-block;
+            .hero-img-wrap {
+                height: 300px;
+            }
+
+            .trust-inner {
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Custom Cursor -->
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-
-    <!-- Floating Bubbles -->
-    <div class="bubbles-bg" id="bubblesContainer"></div>
-
-    <!-- Page Loader -->
-    <div id="loader">
-        <div class="loader-fish">🐟</div>
-        <div class="loader-bar">
-            <div class="loader-progress"></div>
-        </div>
-        <div class="loader-text">Achayans Fish World</div>
+    <!-- NAVBAR -->
+    <nav id="navbar">
+     <a href="#hero" class="nav-logo">
+    <div class="nav-logo-mark">
+        <img src="images/logo.png" alt="Achayans Fish World Logo">
     </div>
+    <span class="nav-logo-name">Achayans Fish World</span>
+</a>
 
-    <!-- Header -->
-    <header id="mainHeader">
-        <a href="#" class="logo">
-            <!-- <div class="logo-icon" style="height: 100px;width: 100px;">
-                <img src="images/logo.png" alt="Logo">
-            </div> -->
-            <div class="logo-text">
-                Achayans Fish World
-                <span>· Palakkad</span>
-            </div>
-        </a>
-        <nav>
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#about" class="nav-link">About</a>
-            <a href="#gallery" class="nav-link">Gallery</a>
-            <a href="#fish-varieties" class="nav-link">Varieties</a>
-            <a href="#testimonials" class="nav-link">Reviews</a>
-            <a href="#contact" class="nav-link">Contact</a>
-            <div class="nav-social">
-                <a href="https://www.facebook.com/jobinjames.jobins" target="_blank"><i
-                        class="ri-facebook-fill"></i></a>
-                <a href="https://www.instagram.com/__jobin_james/" target="_blank"><i class="ri-instagram-line"></i></a>
-                <a href="https://wa.me/919843179686" target="_blank"><i class="ri-whatsapp-line"></i></a>
-            </div>
-        </nav>
-        <button class="mobile-toggle" id="mobileToggle"><i class="ri-menu-3-line"></i></button>
-    </header>
+        <div class="nav-center">
+            <a href="#about" class="nav-link"><span class="en">About</span><span class="ml">ഞങ്ങളെ കുറിച്ച്</span></a>
+            <a href="#gallery" class="nav-link"><span class="en">Gallery</span><span class="ml">ഗാലറി</span></a>
+            <a href="#varieties" class="nav-link"><span class="en">Varieties</span><span class="ml">ഇനങ്ങൾ</span></a>
+            <a href="#reviews" class="nav-link"><span class="en">Reviews</span><span class="ml">അഭിപ്രായങ്ങൾ</span></a>
+            <a href="#contact" class="nav-link"><span class="en">Contact</span><span class="ml">ബന്ധപ്പെടുക</span></a>
+        </div>
+
+        <div class="nav-right">
+            <button class="nav-pill-btn" id="langBtn" onclick="toggleLang()" title="Switch Language">
+                <span id="langLabel">🇮🇳 മലയാളം</span>
+            </button>
+            <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle Theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- MOBILE NAV -->
     <div class="mobile-nav" id="mobileNav">
-        <a href="#home">🏠 Home</a>
-        <a href="#about">🐠 About</a>
-        <a href="#gallery">🎬 Gallery</a>
-        <a href="#fish-varieties">🐟 Fish Varieties</a>
-        <a href="#testimonials">⭐ Reviews</a>
-        <a href="#contact">📞 Contact</a>
+        <a href="#about" onclick="closeMobileMenu()"><span class="en">About</span><span class="ml">ഞങ്ങളെ
+                കുറിച്ച്</span></a>
+        <a href="#gallery" onclick="closeMobileMenu()"><span class="en">Gallery</span><span class="ml">ഗാലറി</span></a>
+        <a href="#varieties" onclick="closeMobileMenu()"><span class="en">Varieties</span><span
+                class="ml">ഇനങ്ങൾ</span></a>
+        <a href="#howitworks" onclick="closeMobileMenu()"><span class="en">How it Works</span><span
+                class="ml">എങ്ങനെ</span></a>
+        <a href="#reviews" onclick="closeMobileMenu()"><span class="en">Reviews</span><span
+                class="ml">അഭിപ്രായങ്ങൾ</span></a>
+        <a href="#contact" onclick="closeMobileMenu()"><span class="en">Contact</span><span
+                class="ml">ബന്ധപ്പെടുക</span></a>
     </div>
 
-    <!-- Hero -->
-    <section id="home">
-        <div class="hero-bg-img"></div>
-        <div class="hero-gradient"></div>
-        <div class="hero-fish-swim">🐟</div>
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
 
-        <div class="hero-content">
-            <div class="hero-badge">
-                <div class="hero-badge-dot"></div>
-                Now Taking Fresh Orders
+        <div class="hero-eyebrow">
+            <div class="live-dot"></div>
+            <span class="en">Now Taking Fresh Orders · Palakkad</span>
+            <span class="ml">ഇപ്പോൾ ഓർഡർ സ്വീകരിക്കുന്നു · പാലക്കാട്</span>
+        </div>
+
+        <h1 class="hero-title">
+            <span class="brand">Achayans</span><br>
+            <span class="en">Fish World</span>
+            <span class="ml">ഫിഷ് വേൾഡ്</span>
+        </h1>
+
+        <p class="hero-sub">
+            <span class="en">Farm-fresh, chemical-free fish from Kambarathchalla, kollengode. Pond-to-plate within hours
+                — taste the difference.</span>
+            <span class="ml">കൊല്ലങ്കോട് കമ്പാരത്ത് ചള്ളയിൽ നിന്നും മായമില്ലാത്ത ഫാം ഫ്രഷ് മീനുകൾ! കുളത്തിൽ നിന്ന്
+                നേരിട്ട് നിങ്ങളുടെ അടുക്കളയിലേക്ക്... ഈ രുചിവ്യത്യാസം അനുഭവിച്ചറിയൂ.</span>
+        </p>
+
+        <div class="hero-ctas">
+            <a href="https://wa.me/919843179686?text=Hello%20Achayans%2C%20I%20want%20to%20order%20fresh%20fish"
+                target="_blank" class="cta-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                    <path
+                        d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.526 5.845L0 24l6.338-1.51A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.67-.5-5.203-1.376l-.37-.22-3.764.897.94-3.657-.244-.387A9.963 9.963 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+                </svg>
+                <span class="en">Order on WhatsApp</span>
+                <span class="ml">വാട്സ്ആപ്പിൽ ഓർഡർ</span>
+            </a>
+            <a href="#varieties" class="cta-secondary">
+                🐠
+                <span class="en">Explore Varieties</span>
+                <span class="ml">ഇനങ്ങൾ കാണുക</span>
+            </a>
+        </div>
+
+        <div class="hero-stats-strip">
+            <div class="hero-stat">
+                <span class="stat-num" data-count="10">0</span><span class="stat-num"
+                    style="font-size:20px;font-weight:800;">+</span>
+                <span class="stat-label"><span class="en">Years</span><span class="ml">വർഷം</span></span>
             </div>
-            <h1 class="hero-title">
-                <!-- Taste the Freshness of<br> -->
-                <span class="accent">Achayans Fish World</span>
-            </h1>
-            <p class="hero-desc">Farm-fresh, chemical-free fish delivered directly from our ponds in Kambarathchall,
-                Akollengode, Palakkad. Pond-to-plate within hours.</p>
-            <div class="hero-btns">
-                <a href="https://wa.me/919843179686?text=Hello%20Achayans%2C%20I%20want%20to%20order%20fresh%20fish"
-                    target="_blank" class="btn-primary">
-                    <i class="ri-whatsapp-line" style="font-size:18px"></i> Order on WhatsApp
-                </a>
-                <a href="#fish-varieties" class="btn-secondary">
-                    <i class="ri-fish-line"></i> Explore Varieties
-                </a>
+            <div class="hero-stat">
+                <span class="stat-num" data-count="500">0</span><span class="stat-num"
+                    style="font-size:20px;font-weight:800;">+</span>
+                <span class="stat-label"><span class="en">Customers</span><span class="ml">ഉപഭോക്താക്കൾ</span></span>
             </div>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <span class="hero-stat-num" data-count="10">0</span><span class="hero-stat-num">+</span>
-                    <span class="hero-stat-label">Years of Farm</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-num" data-count="500">0</span><span class="hero-stat-num">+</span>
-                    <span class="hero-stat-label">Happy Customers</span>
-                </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-num" data-count="6">0</span><span class="hero-stat-num">+</span>
-                    <span class="hero-stat-label">Fish Varieties</span>
-                </div>
+            <div class="hero-stat">
+                <span class="stat-num" data-count="6">0</span><span class="stat-num"
+                    style="font-size:20px;font-weight:800;">+</span>
+                <span class="stat-label"><span class="en">Varieties</span><span class="ml">ഇനങ്ങൾ</span></span>
             </div>
         </div>
 
-        <!-- Wave SVG -->
-        <svg class="hero-waves" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#fdf6ec" />
-        </svg>
+        <div class="hero-visual reveal">
+            <div class="hero-img-wrap">
+                <img src="images/catch-of-the-day-life-at-alappuzha-1727359820_43a9d7a456940ab395c2.webp"
+                    alt="Achayans Fish Farm"
+                    onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22900%22 height=%22480%22><rect fill=%22%230a6e6722%22 width=%22900%22 height=%22480%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-size=%2280%22>🐟</text></svg>'">
+                <div class="hero-img-overlay"></div>
+                <div class="hero-img-badge">
+                    📍 <span class="en">Kambarathchall, Akollengode, Palakkad</span>
+                    <span class="ml">കമ്പരത്തൽ, അകൊലേങ്കോട്, പാലക്കാട്</span>
+                </div>
+                <div class="hero-img-badge2">
+                    <span class="en">🌿 Chemical Free</span>
+                    <span class="ml">🌿 ശുദ്ധ മത്സ്യം</span>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- About -->
+    <!-- TRUST BAR -->
+    <section id="trust">
+        <div class="trust-inner">
+            <div class="trust-item reveal">
+                <div class="trust-icon">🏛️</div>
+                <div class="trust-text">
+                    <strong><span class="en">Govt. Licensed</span><span class="ml">സർക്കാർ ലൈസൻസ്</span></strong>
+                    <span><span class="en">Certified Farm</span><span class="ml">സർ്ടിഫൈഡ് ഫാം</span></span>
+                </div>
+            </div>
+            <div class="trust-item reveal">
+                <div class="trust-icon">🌿</div>
+                <div class="trust-text">
+                    <strong><span class="en">No Chemicals</span><span class="ml">രാസവസ്തു ഇല്ല</span></strong>
+                    <span><span class="en">100% Natural</span><span class="ml">100% പ്രകൃതിദത്തം</span></span>
+                </div>
+            </div>
+            <div class="trust-item reveal">
+                <div class="trust-icon">🚛</div>
+                <div class="trust-text">
+                    <strong><span class="en">Live Delivery</span><span class="ml">ജീവനോടെ ഡെലിവറി</span></strong>
+                    <span><span class="en">Across Palakkad</span><span class="ml">പാലക്കാട് മുഴുവൻ</span></span>
+                </div>
+            </div>
+            <div class="trust-item reveal">
+                <div class="trust-icon">💧</div>
+                <div class="trust-text">
+                    <strong><span class="en">Spring Water</span><span class="ml">ഉറവ വെള്ളം</span></strong>
+                    <span><span class="en">Natural Ponds</span><span class="ml">പ്രകൃതിദത്ത കുളം</span></span>
+                </div>
+            </div>
+            <div class="trust-item reveal">
+                <div class="trust-icon">⭐</div>
+                <div class="trust-text">
+                    <strong><span class="en">500+ Happy Customers</span><span class="ml">500+ സന്തുഷ്ട
+                            ഉപഭോക്താക്കൾ</span></strong>
+                    <span><span class="en">10+ Years Trust</span><span class="ml">10+ വർഷം വിശ്വാസം</span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
     <section id="about">
-        <div style="text-align:center" class="reveal">
-            <div class="section-tag">🌿 Our Story</div>
-            <h2 class="section-title">Rooted in Tradition,<br><span class="gold">Raised with Care</span></h2>
-            <div class="section-line"></div>
-            <p style="color:var(--text-muted);max-width:580px;margin:0 auto;font-size:16px;line-height:1.7">Your trusted
-                destination for premium quality, sustainably grown freshwater fish in the heart of Palakkad.</p>
+        <div style="text-align:center;" class="reveal">
+            <div class="s-tag">🌿 <span class="en">Our Story</span><span class="ml">ഞങ്ങളുടെ കഥ</span></div>
+            <h2 class="s-title">
+                <span class="en">Rooted in Tradition,<br><span class="accent">Raised with Care</span></span>
+                <span class="ml">പാരമ്പര്യത്തിൽ വേരൂന്നി,<br><span class="accent">പ്രേമത്തോടെ വളർത്തി</span></span>
+            </h2>
+            <p class="s-desc" style="margin:14px auto 0;">
+                <span class="en">Your trusted destination for premium quality, sustainably grown freshwater fish in
+                    Palakkad.</span>
+                <span class="ml">പാലക്കാടിൽ ഉയർന്ന നിലവാരത്തിൽ ജൈവ രീതിയിൽ വളർത്തിയ ശുദ്ധജല മത്സ്യം.</span>
+            </p>
         </div>
-        <div class="about-grid">
-            <div class="about-img-wrap reveal-left">
-                <img src="images\1stimg.jpeg" alt="Achayans Fish World Farm">
-                <div class="about-img-badge">
-                    <span class="about-img-badge-num">10+</span>
-                    <span class="about-img-badge-txt">Years of Excellence</span>
+
+        <div class="about-inner">
+            <div class="about-img-col reveal">
+                <img class="about-main-img" src="images/1stimg.jpeg" alt="Achayans Fish Farm"
+                    onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22520%22><rect fill=%22%230a6e6715%22 width=%22600%22 height=%22520%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-size=%22100%22>🐟</text></svg>'">
+                <div class="about-float-card">
+                    <div class="float-num">10+</div>
+                    <div class="float-label">
+                        <span class="en">Years of Excellence</span>
+                        <span class="ml">വർഷത്തെ മികവ്</span>
+                    </div>
                 </div>
             </div>
-            <div class="reveal-right">
-                <div class="section-tag" style="margin-bottom:16px">Kambarathchall, Palakkad</div>
+
+            <div class="reveal" style="display:flex;flex-direction:column;gap:0;">
+                <div class="s-tag" style="margin-bottom:14px;">📍 Kambarathchalla, Palakkad</div>
                 <h3
-                    style="font-size:28px;font-weight:700;margin-bottom:14px;line-height:1.25">
-                    Achayans Fish World — Where Every Fish Tells a Story</h3>
-                <p style="color:var(--text-muted);line-height:1.75;margin-bottom:22px">Located in the serene village of
-                    Kambarathchall, Akollengode, Achayans Fish World has been nurturing high-quality fish using natural
-                    methods for over a decade. Our farm is known for its pristine water sources and ethical farming
-                    practices.</p>
-                <div class="about-features">
-                    <div class="about-feat">
-                        <div class="about-feat-icon"><i class="ri-drop-fill"></i></div><span
-                            style="font-size:14px;font-weight:500">Natural Spring Water</span>
+                    style="font-size:24px;font-weight:800;letter-spacing:-0.8px;margin-bottom:14px;color:var(--text);line-height:1.2;">
+                    <span class="en">Achayans Fish World — Where Every Fish Tells a Story</span>
+                    <span class="ml">അച്ചായൻസ് ഫിഷ് വേൾഡ് — ഓരോ മത്സ്യത്തിലും ഒരു കഥ</span>
+                </h3>
+                <p style="color:var(--text3);line-height:1.75;margin-bottom:22px;font-size:15px;">
+                    <span class="en">Located in the serene village of Kambarathchall, Akollengode, Achayans Fish World
+                        has been nurturing high-quality fish using natural methods for over a decade. Known for pristine
+                        water sources and ethical farming.</span>
+                    <span class="ml">കമ്പരത്തൽ ഗ്രാമത്തിൽ, അകൊലേങ്കോട്ടിൽ സ്ഥിതി ചെയ്യുന്ന അച്ചായൻസ് ഫിഷ് വേൾഡ് ഒരു
+                        ദശകത്തിലധികമായി ഉയർന്ന നിലവാരത്തിൽ ജൈവ മത്സ്യം ഉൽപ്പാദിപ്പിക്കുന്നു.</span>
+                </p>
+
+                <div class="about-feat-grid">
+                    <div class="feat-pill">
+                        <span class="feat-pill-icon">💧</span>
+                        <span class="feat-pill-text"><span class="en">Natural Spring Water</span><span class="ml">ഉറവ
+                                വെള്ളം</span></span>
                     </div>
-                    <div class="about-feat">
-                        <div class="about-feat-icon"><i class="ri-leaf-fill"></i></div><span
-                            style="font-size:14px;font-weight:500">No Harmful Chemicals</span>
+                    <div class="feat-pill">
+                        <span class="feat-pill-icon">🌿</span>
+                        <span class="feat-pill-text"><span class="en">No Harmful Chemicals</span><span
+                                class="ml">രാസവസ്തു ഇല്ല</span></span>
                     </div>
-                    <div class="about-feat">
-                        <div class="about-feat-icon"><i class="ri-government-line"></i></div><span
-                            style="font-size:14px;font-weight:500">Govt. Licensed Farm</span>
+                    <div class="feat-pill">
+                        <span class="feat-pill-icon">🏛️</span>
+                        <span class="feat-pill-text"><span class="en">Govt. Licensed Farm</span><span
+                                class="ml">ലൈസൻസ്ഡ് ഫാം</span></span>
                     </div>
-                    <div class="about-feat">
-                        <div class="about-feat-icon"><i class="ri-truck-fill"></i></div><span
-                            style="font-size:14px;font-weight:500">Live Delivery Available</span>
+                    <div class="feat-pill">
+                        <span class="feat-pill-icon">🚛</span>
+                        <span class="feat-pill-text"><span class="en">Live Delivery</span><span class="ml">ജീവനോടെ
+                                ഡെലിവറി</span></span>
                     </div>
                 </div>
-                <div class="about-quote">
-                    <p>"We believe in delivering the freshest catch from our pond to your plate within hours, ensuring
-                        taste and nutrition at its peak."</p>
-                    <strong>— Achayan, Proprietor · Achayans Fish World</strong>
+
+                <div class="about-quote-card">
+                    <p>
+                        <span class="en">"We believe in delivering the freshest catch from our pond to your plate within
+                            hours, ensuring taste and nutrition at its peak."</span>
+                        <span class="ml">"ഞങ്ങളുടെ കുളത്തിൽ നിന്ന് ഏതാനും മണിക്കൂറുകൾക്കുള്ളിൽ നിങ്ങളുടെ മേശയിൽ ഏറ്റവും
+                            പുതിയ മത്സ്യം എത്തിക്കുന്നതിൽ ഞങ്ങൾ വിശ്വസിക്കുന്നു."</span>
+                        <strong>— Achayan, Proprietor · Achayans Fish World</strong>
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery -->
+    <!-- FEATURES BENTO -->
+    <section id="features">
+        <div class="features-header reveal">
+            <div class="s-tag">✨ <span class="en">Why Choose Us</span><span class="ml">ഞങ്ങളെ തിരഞ്ഞെടുക്കൂ</span></div>
+            <h2 class="s-title">
+                <span class="en">The <span class="accent">Achayans</span> Difference</span>
+                <span class="ml"><span class="accent">അച്ചായൻസ്</span> വ്യത്യാസം</span>
+            </h2>
+            <p class="s-desc" style="margin:12px auto 0;">
+                <span class="en">Every fish, every order, every delivery — quality without compromise.</span>
+                <span class="ml">ഓരോ മത്സ്യവും, ഓരോ ഓർഡറും — ഗുണനിലവാരം ഉറപ്പ്.</span>
+            </p>
+        </div>
+
+        <div class="bento-grid">
+            <div class="bento-card wide reveal">
+                <div class="bento-icon teal">🌊</div>
+                <div class="bento-title">
+                    <span class="en">Farm-to-Table Freshness</span>
+                    <span class="ml">ഫാം മുതൽ മേശ വരെ</span>
+                </div>
+                <div class="bento-desc">
+                    <span class="en">Our fish travel from our ponds in Kambarathchalla directly to your door — no
+                        middlemen, no delays. Harvested on demand for maximum freshness.</span>
+                    <span class="ml">ഞങ്ങളുടെ കുളത്തിൽ നിന്ന് നേരിട്ട് നിങ്ങളുടെ വീട്ടുവാതിൽക്കൽ — ഇടനിലക്കാർ ഇല്ല,
+                        കാലതാമസം ഇല്ല.</span>
+                </div>
+                <div class="bento-metric">2<span> hrs avg delivery</span></div>
+            </div>
+
+            <div class="bento-card reveal" style="transition-delay:0.1s;">
+                <div class="bento-icon gold">🏆</div>
+                <div class="bento-title">
+                    <span class="en">Premium Quality</span>
+                    <span class="ml">പ്രീമിയം ഗുണം</span>
+                </div>
+                <div class="bento-desc">
+                    <span class="en">Grade A fish, carefully selected, naturally raised. No antibiotics, no growth
+                        hormones.</span>
+                    <span class="ml">ഉയർന്ന ഗ്രേഡ് മത്സ്യം, സ്വാഭാവിക രീതിയിൽ വളർത്തിയത്.</span>
+                </div>
+                <div class="bento-tags">
+                    <span class="bento-tag">🌿 Organic</span>
+                    <span class="bento-tag">💊 No Antibiotics</span>
+                    <span class="bento-tag">⭐ Grade A</span>
+                </div>
+            </div>
+
+            <div class="bento-card reveal" style="transition-delay:0.15s;">
+                <div class="bento-icon green">📱</div>
+                <div class="bento-title">
+                    <span class="en">Easy WhatsApp Orders</span>
+                    <span class="ml">എളുപ്പം ഓർഡർ</span>
+                </div>
+                <div class="bento-desc">
+                    <span class="en">Just message us on WhatsApp. No apps, no hassle. We reply within minutes.</span>
+                    <span class="ml">വാട്സ്ആപ്പിൽ ഒരു മെസേജ്. ഉടൻ മറുപടി.</span>
+                </div>
+                <div class="bento-metric" style="color:var(--wa);">1<span> min response</span></div>
+            </div>
+
+            <div class="bento-card reveal" style="transition-delay:0.2s;">
+                <div class="bento-icon blue">🚛</div>
+                <div class="bento-title">
+                    <span class="en">Live Fish Delivery</span>
+                    <span class="ml">ജീവനോടെ ഡെലിവറി</span>
+                </div>
+                <div class="bento-desc">
+                    <span class="en">We can deliver live fish to your location across Palakkad district. Perfect for
+                        events.</span>
+                    <span class="ml">പാലക്കാട് ജില്ലയിൽ ഉടനീളം ജീവനോടെ ഡെലിവറി.</span>
+                </div>
+            </div>
+
+            <dsiv class="bento-card wide reveal" style="transition-delay:0.25s;">
+                <div class="bento-icon teal">🎉</div>
+                <div class="bento-title">
+                    <span class="en">Bulk & Festival Orders Welcome</span>
+                    <span class="ml">ബൾക്ക്, ആഘോഷ ഓർഡർ</span>
+                </div>
+                <div class="bento-desc">
+                    <span class="en">Planning a wedding, Vishu feast, or restaurant supply? We offer special bulk
+                        pricing and guaranteed freshness for large orders. Hotels and restaurants get priority
+                        scheduling.</span>
+                    <span class="ml">വിവാഹം, വിഷു വിരുന്ന്, ഹോട്ടൽ സപ്ലൈ — ബൾക്ക് ഓർഡറുകൾക്ക് പ്രത്യേക വില.</span>
+                </div>
+                <div class="bento-tags">
+                    <span class="bento-tag">🏨 Hotels</span>
+                    <span class="bento-tag">💒 Weddings</span>
+                    <span class="bento-tag">🥘 Restaurants</span>
+                    <span class="bento-tag">🎊 Events</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
     <section id="gallery">
-        <div class="gallery-header reveal">
-            <div class="section-tag">📸 Farm Life</div>
-            <h2 class="section-title" style="color:white">Farm Moments &<br><span style="color:var(--gold)">Catch
-                    Videos</span></h2>
-            <div class="section-line"></div>
-            <p style="color:rgba(255,255,255,0.5);font-size:15px;line-height:1.7">Step into our farm — watch the vibrant
-                life of our fish and the scenic beauty of Achayans Fish World.</p>
-        </div>
-
-        <div class="gallery-nav-row reveal">
-            <div class="hint"><i class="ri-drag-move-line" style="color:var(--gold)"></i> Drag or swipe to explore</div>
-            <div class="gallery-nav-btns">
-                <button class="g-nav-btn" id="gPrev"><i class="ri-arrow-left-s-line"></i></button>
-                <button class="g-nav-btn" id="gNext"><i class="ri-arrow-right-s-line"></i></button>
+        <div class="gallery-hd reveal">
+            <div>
+                <div class="s-tag">📸 <span class="en">Farm Life</span><span class="ml">ഫാം ജീവിതം</span></div>
+                <h2 class="s-title">
+                    <span class="en">Our Farm &<br><span class="gold">Catch Videos</span></span>
+                    <span class="ml">ഞങ്ങളുടെ ഫാം &<br><span class="gold">വീഡിയോകൾ</span></span>
+                </h2>
+            </div>
+            <div class="g-nav-btns">
+                <button class="g-nav-btn" id="gPrev">←</button>
+                <button class="g-nav-btn" id="gNext">→</button>
             </div>
         </div>
 
-        <div class="gallery-track" id="galleryTrack">
-            <!-- Card 1 -->
+        <div class="gallery-scroll" id="galleryScroll">
             <div class="g-card">
                 <video autoplay muted loop playsinline>
-                    <source src="images\video5.mp4" type="video/mp4">
-                    <img src="https://readdy.ai/api/search-image?query=karimeen%20pearl%20spot%20fish%20swimming%20clear%20pond%20water%20kerala%20fish%20farm%20close%20up&width=400&height=520&seq=201&orientation=portrait"
-                        alt="Fresh Karimeen">
+                    <source src="images/video5.mp4" type="video/mp4">
                 </video>
-                <div class="g-card-overlay"></div>
-                <div class="g-card-top">
-                    <div class="g-insta"><i class="ri-instagram-line"></i></div>
-                </div>
-                <div class="g-card-bottom">
-                    <div class="g-pill">🎥 Fresh Karimeen</div>
-                </div>
+                <div class="g-overlay"></div>
+                <div class="g-label">🐟 <span class="en">Fresh Karimeen</span><span class="ml">കരിമീൻ</span></div>
             </div>
-            <!-- Card 2 -->
             <div class="g-card">
                 <video autoplay muted loop playsinline>
-                    <source src="images\video2.mp4" type="video/mp4">
-                    <img src="https://readdy.ai/api/search-image?query=fish%20swimming%20tropical%20freshwater%20pond%20kerala%20aquaculture%20beautiful%20clear%20water&width=400&height=520&seq=202&orientation=portrait"
-                        alt="Fish in Pond">
+                    <source src="images/video2.mp4" type="video/mp4">
                 </video>
-                <div class="g-card-overlay"></div>
-                <div class="g-card-top">
-                    <div class="g-insta"><i class="ri-instagram-line"></i></div>
-                </div>
-                <div class="g-card-bottom">
-                    <div class="g-pill">🌊 Fish in Our Pond</div>
+                <div class="g-overlay"></div>
+                <div class="g-label">🌊 <span class="en">Fish in Pond</span><span class="ml">കുളത്തിലെ മത്സ്യം</span>
                 </div>
             </div>
-            <!-- Card 3 -->
             <div class="g-card">
                 <video autoplay muted loop playsinline>
-                    <source src="images\video3.mp4" type="video/mp4">
-                    <img src="https://readdy.ai/api/search-image?query=fish%20harvest%20net%20freshwater%20pond%20workers%20kerala%20aquaculture%20sunrise&width=400&height=520&seq=203&orientation=portrait"
-                        alt="Harvesting">
+                    <source src="images/video3.mp4" type="video/mp4">
                 </video>
-                <div class="g-card-overlay"></div>
-                <div class="g-card-top">
-                    <div class="g-insta"><i class="ri-instagram-line"></i></div>
-                </div>
-                <div class="g-card-bottom">
-                    <div class="g-pill">🐟 Harvesting Process</div>
-                </div>
+                <div class="g-overlay"></div>
+                <div class="g-label">🎣 <span class="en">Harvesting</span><span class="ml">മത്സ്യം പിടിക്കൽ</span></div>
             </div>
-            <!-- Card 4 -->
             <div class="g-card">
                 <video autoplay muted loop playsinline>
-                    <source src="images\video4.mp4" type="video/mp4">
-                    <img src="https://readdy.ai/api/search-image?query=fish%20feeding%20pond%20surface%20splashing%20water%20morning%20natural%20feeding%20kerala%20fish%20farm&width=400&height=520&seq=204&orientation=portrait"
-                        alt="Feeding">
+                    <source src="images/video4.mp4" type="video/mp4">
                 </video>
-                <div class="g-card-overlay"></div>
-                <div class="g-card-top">
-                    <div class="g-insta"><i class="ri-instagram-line"></i></div>
-                </div>
-                <div class="g-card-bottom">
-                    <div class="g-pill">🌾 Natural Feeding</div>
-                </div>
+                <div class="g-overlay"></div>
+                <div class="g-label">🌾 <span class="en">Natural Feeding</span><span class="ml">ജൈവ ഭക്ഷണം</span></div>
             </div>
-            <!-- Card 5 -->
             <div class="g-card">
                 <video autoplay muted loop playsinline>
-                    <source src="images\video1.mp4" type="video/mp4">
-                    <img src="https://readdy.ai/api/search-image?query=fresh%20fish%20catch%20basket%20kerala%20market%20tilapia%20rohu%20colorful%20vibrant&width=400&height=520&seq=205&orientation=portrait"
-                        alt="Daily Catch">
+                    <source src="images/video1.mp4" type="video/mp4">
                 </video>
-                <div class="g-card-overlay"></div>
-                <div class="g-card-top">
-                    <div class="g-insta"><i class="ri-instagram-line"></i></div>
-                </div>
-                <div class="g-card-bottom">
-                    <div class="g-pill">🔥 Daily Fresh Catch</div>
-                </div>
+                <div class="g-overlay"></div>
+                <div class="g-label">🔥 <span class="en">Daily Catch</span><span class="ml">ദൈനംദിന വിളവ്</span></div>
             </div>
-            <!-- Card 6 -->
-            <div class="g-card">
-                <img src="https://readdy.ai/api/search-image?query=green%20fish%20pond%20farm%20lush%20tropical%20kerala%20sunset%20golden%20hour%20scenic%20beautiful&width=400&height=520&seq=206&orientation=portrait"
-                    alt="Farm Scenic">
-                <div class="g-card-overlay"></div>
-                <div class="g-card-top">
-                    <div class="g-insta"><i class="ri-instagram-line"></i></div>
-                </div>
-                <div class="g-card-bottom">
-                    <div class="g-pill">🌿 Farm at Sunset</div>
-                </div>
-            </div>
-            <!-- Card 7 -->
-            <div class="g-card">
-                <img src="https://readdy.ai/api/search-image?query=karimeen%20pearl%20spot%20kerala%20fish%20closeup%20fresh%20shiny%20scales%20wooden%20board%20food%20photography&width=400&height=520&seq=207&orientation=portrait"
-                    alt="Karimeen Closeup">
-                <div class="g-card-overlay"></div>
-                <div class="g-card-top">
-                    <div class="g-insta"><i class="ri-instagram-line"></i></div>
-                </div>
-                <div class="g-card-bottom">
-                    <div class="g-pill">✨ Karimeen Up Close</div>
-                </div>
+            <div class="g-card"
+                style="background:linear-gradient(135deg,#0a6e6720,#14b8a615);display:flex;align-items:center;justify-content:center;font-size:80px;">
+                🌿
+                <div class="g-overlay"></div>
+                <div class="g-label">🌅 <span class="en">Farm at Sunset</span><span class="ml">സൂര്യാസ്തമയം</span></div>
             </div>
         </div>
 
         <div class="gallery-cta reveal">
             <a href="https://www.instagram.com/__jobin_james/" target="_blank" class="insta-btn">
-                <i class="ri-instagram-line" style="font-size:20px"></i> Follow @__jobin_james for more
+                📸 <span class="en">Follow @__jobin_james for more</span>
+                <span class="ml">കൂടുതൽ കാണുക</span>
             </a>
         </div>
     </section>
 
-    <!-- Fish Varieties -->
-    <!-- <section id="fish-varieties">
-    <div style="text-align:center" class="reveal">
-        <div class="section-tag">🐠 Our Produce</div>
-        <h2 class="section-title">Premium Fish<br><span class="gold">Varieties</span></h2>
-        <div class="section-line"></div>
-        <p style="color:var(--text-muted);max-width:540px;margin:0 auto;font-size:16px;line-height:1.7">Pond-raised, farm-fresh, and exceptionally flavourful — straight from our water to your kitchen.</p>
-    </div>
-    <div class="varieties-grid">
-        <div class="fish-card reveal">
-            <div class="fish-card-img-wrap">
-                <img src="https://readdy.ai/api/search-image?query=karimeen%20pearl%20spot%20fish%20closeup%20fresh%20caught%20kerala%20wooden%20table%20high%20quality%20food%20photography&width=400&height=280&seq=6&orientation=landscape" alt="Karimeen">
-                <div class="fish-card-badge">State Fish of Kerala</div>
-            </div>
-            <div class="fish-card-body">
-                <h3>Karimeen (Pearl Spot)</h3>
-                <p>Kerala's prized delicacy — firm flesh, delicate flavour. Perfect for marinades, pollichathu, and traditional curries.</p>
-                <div class="fish-card-footer">
-                    <div class="fish-price">₹320 <span>/ kg</span></div>
-                    <a href="https://wa.me/919843179686?text=I%20want%20to%20order%20Karimeen" class="order-btn"><i class="ri-whatsapp-line"></i> Order Now</a>
-                </div>
-            </div>
+    <!-- FISH VARIETIES -->
+    <section id="varieties">
+        <div class="varieties-header reveal">
+            <div class="s-tag">🐠 <span class="en">Our Produce</span><span class="ml">ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ</span></div>
+            <h2 class="s-title">
+                <span class="en">Premium Fish<br><span class="accent">Varieties</span></span>
+                <span class="ml">ഉന്നത നിലവാരത്തിൽ<br><span class="accent">മത്സ്യ ഇനങ്ങൾ</span></span>
+            </h2>
+            <p class="s-desc">
+                <span class="en">Pond-raised, farm-fresh, and exceptionally flavourful — straight from our water to your
+                    kitchen.</span>
+                <span class="ml">കുളത്തിൽ നിന്ന് നേരിട്ട് നിങ്ങളുടെ അടുക്കളയിലേക്ക്.</span>
+            </p>
         </div>
-        <div class="fish-card reveal" style="transition-delay:0.1s">
-            <div class="fish-card-img-wrap">
-                <img src="https://readdy.ai/api/search-image?query=fresh%20tilapia%20fish%20whole%20shiny%20scales%20ice%20aquaculture%20freshwater%20food%20photography&width=400&height=280&seq=7&orientation=landscape" alt="Tilapia">
-                <div class="fish-card-badge">Farm Favourite</div>
-            </div>
-            <div class="fish-card-body">
-                <h3>Tilapia</h3>
-                <p>Mild, sweet taste with lean protein. Farm-raised without antibiotics. Great for grilling, frying, and curries.</p>
-                <div class="fish-card-footer">
-                    <div class="fish-price">₹220 <span>/ kg</span></div>
-                    <a href="https://wa.me/919843179686?text=I%20want%20to%20order%20Tilapia" class="order-btn"><i class="ri-whatsapp-line"></i> Order Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="fish-card reveal" style="transition-delay:0.2s">
-            <div class="fish-card-img-wrap">
-                <img src="https://readdy.ai/api/search-image?query=rohu%20rui%20fish%20fresh%20indian%20major%20carp%20whole%20display%20clean%20background%20food%20photography&width=400&height=280&seq=8&orientation=landscape" alt="Rohu">
-                <div class="fish-card-badge">Biryani Favourite</div>
-            </div>
-            <div class="fish-card-body">
-                <h3>Rohu (Rui)</h3>
-                <p>Juicy texture, rich taste. Popular for traditional Kerala curries and festive biryanis. Sold live or fresh.</p>
-                <div class="fish-card-footer">
-                    <div class="fish-price">₹280 <span>/ kg</span></div>
-                    <a href="https://wa.me/919843179686?text=I%20want%20to%20order%20Rohu" class="order-btn"><i class="ri-whatsapp-line"></i> Order Now</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="varieties-note reveal">
-        <p><i class="ri-sparkling-2-line"></i> Bulk orders & special festival discounts available — Contact us for full price list</p>
-    </div>
-</section> -->
 
-    <!-- Testimonials -->
-    <section id="testimonials">
-        <div style="text-align:center" class="reveal">
-            <div class="section-tag">⭐ Customer Love</div>
-            <h2 class="section-title">What Our<br><span class="gold">Customers Say</span></h2>
-            <div class="section-line"></div>
-            <p style="color:var(--text-muted);max-width:500px;margin:0 auto;font-size:15px">Loved by families, hotels,
-                and seafood lovers across Palakkad and beyond.</p>
-        </div>
-        <div class="testimonials-inner reveal">
-            <div class="swiper testimonialSwiper" style="padding-bottom:48px">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="t-card">
-                            <div class="t-stars">⭐⭐⭐⭐⭐</div>
-                            <p class="t-text">"Achayans Fish World provides the freshest karimeen I've ever tasted in
-                                Palakkad. The fish stays fresh even after a day, and they deliver promptly. Highly
-                                recommended!"</p>
-                            <div class="t-author">
-                                <div class="t-avatar"><i class="ri-user-3-line"></i></div>
-                                <div>
-                                    <div class="t-author-name">Ramesh Nair</div>
-                                    <div class="t-author-role">Home Chef, Akollengode</div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="varieties-grid">
+            <div class="fish-card reveal">
+                <div class="fish-img-placeholder">🐟</div>
+                <div class="fish-body">
+                    <div class="fish-badge">🏆 <span class="en">State Fish</span><span class="ml">സംസ്ഥാന മത്സ്യം</span>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="t-card">
-                            <div class="t-stars">⭐⭐⭐⭐⭐</div>
-                            <p class="t-text">"We get our restaurant's daily fish supply from Achayans. Consistent
-                                quality, great size, and always on time. Their tilapia is a customer favourite."</p>
-                            <div class="t-author">
-                                <div class="t-avatar"><i class="ri-restaurant-line"></i></div>
-                                <div>
-                                    <div class="t-author-name">Sunil Mathew</div>
-                                    <div class="t-author-role">Hotel Sarovaram, Palakkad</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="fish-name"><span class="en">Karimeen (Pearl Spot)</span><span class="ml">കരിമീൻ</span>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="t-card">
-                            <div class="t-stars">⭐⭐⭐⭐⭐</div>
-                            <p class="t-text">"I've been buying from Achayans for two years. Their fish are
-                                chemical-free, and you can really taste the difference. The pond-to-plate concept works
-                                great!"</p>
-                            <div class="t-author">
-                                <div class="t-avatar"><i class="ri-user-heart-line"></i></div>
-                                <div>
-                                    <div class="t-author-name">Lakshmi Rajan</div>
-                                    <div class="t-author-role">Regular Customer</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="t-card">
-                            <div class="t-stars">⭐⭐⭐⭐⭐</div>
-                            <p class="t-text">"We ordered live rohu for a family get-together and the quality was
-                                superb. The fish were lively and fresh. Excellent service from the team."</p>
-                            <div class="t-author">
-                                <div class="t-avatar"><i class="ri-group-line"></i></div>
-                                <div>
-                                    <div class="t-author-name">Sujith K.</div>
-                                    <div class="t-author-role">Event Organizer</div>
-                                </div>
-                            </div>
-                        </div>
+                    <p class="fish-desc">
+                        <span class="en">Kerala's prized delicacy — firm flesh, delicate flavour. Perfect for
+                            pollichathu and curries.</span>
+                        <span class="ml">കേരളത്തിന്റെ പ്രിയ മത്സ്യം. ദൃഢ മാംസം, മനോഹര രുചി.</span>
+                    </p>
+                    <div class="fish-footer">
+                        <div class="fish-price">₹320 <small>/ kg</small></div>
+                        <a href="https://wa.me/919843179686?text=I%20want%20to%20order%20Karimeen" target="_blank"
+                            class="order-btn">
+                            💬 <span class="en">Order</span><span class="ml">ഓർഡർ</span>
+                        </a>
                     </div>
                 </div>
-                <div class="swiper-pagination" style="margin-top:16px"></div>
+            </div>
+
+            <div class="fish-card reveal" style="transition-delay:0.1s;">
+                <div class="fish-img-placeholder">🐠</div>
+                <div class="fish-body">
+                    <div class="fish-badge">⭐ <span class="en">Farm Favourite</span><span class="ml">ഫാം ഫേവ്</span>
+                    </div>
+                    <div class="fish-name"><span class="en">Tilapia</span><span class="ml">തിലാപ്പിയ</span></div>
+                    <p class="fish-desc">
+                        <span class="en">Mild, sweet taste with lean protein. Farm-raised without antibiotics. Great for
+                            grilling and curries.</span>
+                        <span class="ml">മൃദുലമായ, മധുരമുള്ള രുചി. ആൻ്റിബയോട്ടിക് ഇല്ലാതെ.</span>
+                    </p>
+                    <div class="fish-footer">
+                        <div class="fish-price">₹220 <small>/ kg</small></div>
+                        <a href="https://wa.me/919843179686?text=I%20want%20to%20order%20Tilapia" target="_blank"
+                            class="order-btn">
+                            💬 <span class="en">Order</span><span class="ml">ഓർഡർ</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fish-card reveal" style="transition-delay:0.2s;">
+                <div class="fish-img-placeholder">🎣</div>
+                <div class="fish-body">
+                    <div class="fish-badge">🍚 <span class="en">Biryani Fav</span><span class="ml">ബിരിയാണി ഇഷ്ടം</span>
+                    </div>
+                    <div class="fish-name"><span class="en">Rohu (Rui)</span><span class="ml">റോഹു (രൂ)</span></div>
+                    <p class="fish-desc">
+                        <span class="en">Juicy texture, rich taste. Perfect for Kerala curries and festive biryanis.
+                            Sold live or fresh.</span>
+                        <span class="ml">ആഘോഷ ഭക്ഷണങ്ങൾക്ക് അനുയോജ്യം. ജീവനോടെ ലഭ്യം.</span>
+                    </p>
+                    <div class="fish-footer">
+                        <div class="fish-price">₹280 <small>/ kg</small></div>
+                        <a href="https://wa.me/919843179686?text=I%20want%20to%20order%20Rohu" target="_blank"
+                            class="order-btn">
+                            💬 <span class="en">Order</span><span class="ml">ഓർഡർ</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fish-card reveal" style="transition-delay:0.3s;">
+                <div class="fish-img-placeholder" style="font-size:62px;">🐡</div>
+                <div class="fish-body">
+                    <div class="fish-badge">🌟 <span class="en">Popular</span><span class="ml">ജനപ്രിയം</span></div>
+                    <div class="fish-name"><span class="en">Grass Carp</span><span class="ml">ഗ്രാസ് കാർപ്</span></div>
+                    <p class="fish-desc">
+                        <span class="en">Herbivorous, naturally raised on aquatic plants. Low fat, high protein. Great
+                            for steaming.</span>
+                        <span class="ml">സസ്യഭക്ഷണം. ഫ്യാറ്റ് കുറവ്, പ്രോടീൻ കൂടുതൽ.</span>
+                    </p>
+                    <div class="fish-footer">
+                        <div class="fish-price">₹200 <small>/ kg</small></div>
+                        <a href="https://wa.me/919843179686?text=I%20want%20to%20order%20Grass%20Carp" target="_blank"
+                            class="order-btn">
+                            💬 <span class="en">Order</span><span class="ml">ഓർഡർ</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fish-card reveal" style="transition-delay:0.4s;">
+                <div class="fish-img-placeholder">🐟</div>
+                <div class="fish-body">
+                    <div class="fish-badge">💪 <span class="en">High Protein</span><span class="ml">ഉയർന്ന
+                            പ്രോടീൻ</span></div>
+                    <div class="fish-name"><span class="en">Catla (Catfish)</span><span class="ml">കട്ല</span></div>
+                    <p class="fish-desc">
+                        <span class="en">Large, meaty fish. Rich in omega-3 and protein. Ideal for family-size servings
+                            and bulk orders.</span>
+                        <span class="ml">വലിയ, ഇറച്ചി കൂടിയ മത്സ്യം. ഒമേഗ-3 സമൃദ്ധം.</span>
+                    </p>
+                    <div class="fish-footer">
+                        <div class="fish-price">₹260 <small>/ kg</small></div>
+                        <a href="https://wa.me/919843179686?text=I%20want%20to%20order%20Catla" target="_blank"
+                            class="order-btn">
+                            💬 <span class="en">Order</span><span class="ml">ഓർഡർ</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fish-card reveal" style="transition-delay:0.5s;">
+                <div class="fish-img-placeholder"
+                    style="background:linear-gradient(135deg,var(--gold)22,var(--gold)11);">🐟</div>
+                <div class="fish-body">
+                    <div class="fish-badge">🎊 <span class="en">Seasonal</span><span class="ml">സീസണൽ</span></div>
+                    <div class="fish-name"><span class="en">Silver Carp</span><span class="ml">സിൽവർ കാർപ്</span></div>
+                    <p class="fish-desc">
+                        <span class="en">Silvery, fast-growing freshwater fish. Excellent taste. Perfect for frying and
+                            spicy curries.</span>
+                        <span class="ml">ഫ്രൈ, കറി — ഏതു രൂപത്തിലും ഉൽകൃഷ്ടം.</span>
+                    </p>
+                    <div class="fish-footer">
+                        <div class="fish-price">₹180 <small>/ kg</small></div>
+                        <a href="https://wa.me/919843179686?text=I%20want%20to%20order%20Silver%20Carp" target="_blank"
+                            class="order-btn">
+                            💬 <span class="en">Order</span><span class="ml">ഓർഡർ</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="varieties-note reveal">
+            <p>✨ <span class="en">Bulk orders & special festival discounts available — Contact us for full price
+                    list</span>
+                <span class="ml">ബൾക്ക് ഓർഡർ, ആഘോഷ ഡിസ്കൗണ്ട് — ഞങ്ങളെ ബന്ധപ്പെടൂ</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="howitworks">
+        <div class="how-header reveal">
+            <div class="s-tag">📋 <span class="en">The Process</span><span class="ml">പ്രക്രിയ</span></div>
+            <h2 class="s-title">
+                <span class="en">How to Order<br><span class="accent">From Our Farm</span></span>
+                <span class="ml">ഫാമിൽ നിന്ന്<br><span class="accent">എങ്ങനെ ഓർഡർ ചെയ്യാം</span></span>
+            </h2>
+            <p class="s-desc">
+                <span class="en">Simple, fast, and fresh — ordering from Achayans is as easy as 1-2-3-4.</span>
+                <span class="ml">ലളിതം, വേഗം, ശുദ്ധം — ഓർഡർ ചെയ്യൽ അത്ര ലളിതം.</span>
+            </p>
+        </div>
+
+        <div class="steps-grid">
+            <div class="step-card reveal">
+                <span class="step-num">01</span>
+                <span class="step-emoji">💬</span>
+                <div class="step-title"><span class="en">Message Us</span><span class="ml">ഒരു മെസേജ്</span></div>
+                <p class="step-desc">
+                    <span class="en">WhatsApp or call us with your fish variety and quantity needed.</span>
+                    <span class="ml">വേണ്ട ഇനവും അളവും വാട്സ്ആപ്പ് ചെയ്യൂ.</span>
+                </p>
+            </div>
+            <div class="step-card reveal" style="transition-delay:0.1s;">
+                <span class="step-num">02</span>
+                <span class="step-emoji">🎣</span>
+                <div class="step-title"><span class="en">We Harvest</span><span class="ml">ഞങ്ങൾ പിടിക്കുന്നു</span>
+                </div>
+                <p class="step-desc">
+                    <span class="en">Fresh fish harvested on-demand from our clean ponds in Kambarathchalla.</span>
+                    <span class="ml">നിങ്ങളുടെ ഓർഡർ അനുസരിച്ച് ഫ്രഷ് ആക്കി തരും.</span>
+                </p>
+            </div>
+            <div class="step-card reveal" style="transition-delay:0.2s;">
+                <span class="step-num">03</span>
+                <span class="step-emoji">📦</span>
+                <div class="step-title"><span class="en">We Pack</span><span class="ml">പ്രൊഫഷണൽ പ്ലക്കിംഗ്</span></div>
+                <p class="step-desc">
+                    <span class="en">Hygienically packed in water-tight bags, ensuring live fish arrive in perfect
+                        condition.</span>
+                    <span class="ml">ശുചിത്വത്തോടെ പ്ലക്ക് ചെയ്ത് ജീവനോടെ ഡെലിവർ ചെയ്യും.</span>
+                </p>
+            </div>
+            <div class="step-card reveal" style="transition-delay:0.3s;">
+                <span class="step-num">04</span>
+                <span class="step-emoji">🚛</span>
+                <div class="step-title"><span class="en">Delivered Fresh</span><span class="ml">ഫ്രഷ് ഡെലിവറി</span>
+                </div>
+                <p class="step-desc">
+                    <span class="en">Delivered to your doorstep across Palakkad within hours of harvest.</span>
+                    <span class="ml">ഏതാനും മണിക്കൂറിനുള്ളിൽ നിങ്ങളുടെ വീട്ടിൽ.</span>
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact">
-        <div style="text-align:center" class="reveal">
-            <div class="section-tag">📞 Get In Touch</div>
-            <h2 class="section-title">Order Fresh Fish<br><span style="color:var(--gold)">From Our Farm</span></h2>
-            <div class="section-line"></div>
-            <p style="color:rgba(255,255,255,0.45);max-width:500px;margin:0 auto;font-size:15px">Visit our farm or place
-                an order — we deliver fresh fish across Palakkad region.</p>
+    <!-- REVIEWS -->
+    <section id="reviews">
+        <div class="reviews-header reveal">
+            <div class="s-tag">⭐ <span class="en">Customer Love</span><span class="ml">ഉപഭോക്തൃ സ്നേഹം</span></div>
+            <h2 class="s-title">
+                <span class="en">What Our<br><span class="accent">Customers Say</span></span>
+                <span class="ml">ഉപഭോക്താക്കൾ<br><span class="accent">പറയുന്നത്</span></span>
+            </h2>
+            <p class="s-desc">
+                <span class="en">Loved by families, hotels, and seafood lovers across Palakkad and beyond.</span>
+                <span class="ml">കുടുംബങ്ങൾ, ഹോട്ടലുകൾ, ഭക്ഷണ പ്രേമികൾ — എല്ലാവരും ഇഷ്ടപ്പെടുന്നു.</span>
+            </p>
         </div>
-        <div class="contact-grid">
-            <div class="reveal-left">
-                <div class="contact-info-item">
-                    <div class="contact-info-icon"><i class="ri-map-pin-fill"></i></div>
-                    <div class="contact-info-text">
-                        <strong>Our Location</strong>
-                        <span>Kambarathchall, Akollengode, Palakkad District, Kerala - 678506</span>
+
+        <div class="reviews-grid">
+            <div class="review-card reveal">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text"><span class="en">"Achayans Fish World provides the freshest karimeen I've ever
+                        tasted in Palakkad. The fish stays fresh even after a day, and they deliver promptly!"</span>
+                    <span class="ml">"ഞാൻ ഇതുവരെ കഴിച്ചിരിക്കുന്ന ഏറ്റവും ഫ്രഷ് കരിമീൻ. ഒരു ദിവസം കഴിഞ്ഞും
+                        ഫ്രഷ്!"</span>
+                </p>
+                <div class="review-author">
+                    <div class="r-avatar">👨</div>
+                    <div>
+                        <div class="r-name">Ramesh Nair</div>
+                        <div class="r-role"><span class="en">Home Chef, Akollengode</span><span class="ml">ഹോം ഷെഫ്,
+                                അകൊലേങ്കോട്</span></div>
                     </div>
                 </div>
-                <div class="contact-info-item">
-                    <div class="contact-info-icon"><i class="ri-phone-fill"></i></div>
-                    <div class="contact-info-text">
-                        <strong>Phone / WhatsApp</strong>
-                        <span>+91 98431 79686</span>
+            </div>
+
+            <div class="review-card reveal" style="transition-delay:0.1s;">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text"><span class="en">"We get our restaurant's daily fish supply from Achayans.
+                        Consistent quality, great size, and always on time. Their tilapia is a customer
+                        favourite!"</span>
+                    <span class="ml">"ഞങ്ങളുടെ റസ്റ്ററന്‍റ്റിന്റെ ദൈനംദിന സപ്ലൈ. ഗുണം, വലിപ്പം — എല്ലാം
+                        ഒന്നൊന്നർ!"</span>
+                </p>
+                <div class="review-author">
+                    <div class="r-avatar">🍽️</div>
+                    <div>
+                        <div class="r-name">Sunil Mathew</div>
+                        <div class="r-role"><span class="en">Hotel Sarovaram, Palakkad</span><span class="ml">ഹോട്ടൽ
+                                സരോവരം</span></div>
                     </div>
                 </div>
-                <div class="contact-info-item">
-                    <div class="contact-info-icon"><i class="ri-mail-fill"></i></div>
-                    <div class="contact-info-text">
-                        <strong>Email</strong>
-                        <span>achayansfishfarm@gmail.com</span>
+            </div>
+
+            <div class="review-card reveal" style="transition-delay:0.2s;">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text"><span class="en">"I've been buying from Achayans for two years. Chemical-free,
+                        and you can really taste the difference. The pond-to-plate concept works great!"</span>
+                    <span class="ml">"രണ്ടു വർഷമായി ഇവിടെ നിന്ന് വാങ്ങുന്നു. വ്യത്യാസം അനുഭവിക്കാം!"</span>
+                </p>
+                <div class="review-author">
+                    <div class="r-avatar">👩</div>
+                    <div>
+                        <div class="r-name">Lakshmi Rajan</div>
+                        <div class="r-role"><span class="en">Regular Customer</span><span class="ml">സ്ഥിരം
+                                ഉപഭോക്ത്രി</span></div>
                     </div>
                 </div>
-                <div class="contact-info-item">
-                    <div class="contact-info-icon"><i class="ri-time-fill"></i></div>
-                    <div class="contact-info-text">
-                        <strong>Working Hours</strong>
-                        <span>Mon – Sun: 8:00 AM – 7:00 PM</span>
+            </div>
+
+            <div class="review-card reveal" style="transition-delay:0.3s;">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text"><span class="en">"We ordered live rohu for a family get-together. The quality was
+                        superb — the fish were lively and fresh. Excellent service!"</span>
+                    <span class="ml">"കൂടിക്കാഴ്ചക്ക് ജീവൻ ഉള്ള റോഹു. ഉൽകൃഷ്ട ഗുണം!"</span>
+                </p>
+                <div class="review-author">
+                    <div class="r-avatar">👨‍👩‍👧</div>
+                    <div>
+                        <div class="r-name">Sujith K.</div>
+                        <div class="r-role"><span class="en">Event Organizer</span><span class="ml">ഇവന്‍റ്
+                                ഓർഗനൈസർ</span></div>
                     </div>
                 </div>
-                <div class="contact-social">
-                    <a href="https://www.facebook.com/jobinjames.jobins" target="_blank"
-                        class="c-social-btn c-social-fb"><i class="ri-facebook-fill"></i> Facebook</a>
-                    <a href="https://www.instagram.com/__jobin_james/" target="_blank"
-                        class="c-social-btn c-social-ig"><i class="ri-instagram-line"></i> Instagram</a>
-                    <a href="https://wa.me/919843179686" target="_blank" class="c-social-btn c-social-wa"><i
-                            class="ri-whatsapp-line"></i> WhatsApp</a>
+            </div>
+
+            <div class="review-card reveal" style="transition-delay:0.4s;">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text"><span class="en">"Amazing freshness! Got bulk order for Vishu feast — everyone
+                        was impressed. Will definitely order again for Onam too!"</span>
+                    <span class="ml">"വിഷുവിന് ബൾക്ക് ഓർഡർ. എല്ലാവർക്കും ഇഷ്ടമായി. ഓണത്തിനും ഓർഡർ ചെയ്യും!"</span>
+                </p>
+                <div class="review-author">
+                    <div class="r-avatar">🏡</div>
+                    <div>
+                        <div class="r-name">Priya Menon</div>
+                        <div class="r-role"><span class="en">Homemaker, Palakkad</span><span class="ml">ഗൃഹിണി,
+                                പാലക്കാട്</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card reveal" style="transition-delay:0.5s;">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <p class="review-text"><span class="en">"The karimeen pollichathu I made with Achayans fish was the best
+                        I've ever cooked. The freshness makes all the difference in traditional recipes!"</span>
+                    <span class="ml">"അച്ചായൻസ് മത്സ്യം ഉപയോഗിച്ചുണ്ടാക്കിയ കരിമീൻ പൊള്ളിച്ചത്. ഫ്രഷ്നസ്
+                        മികച്ചതാക്കുന്നു!"</span>
+                </p>
+                <div class="review-author">
+                    <div class="r-avatar">👨‍🍳</div>
+                    <div>
+                        <div class="r-name">Anoop Thomas</div>
+                        <div class="r-role"><span class="en">Food Blogger, Palakkad</span><span class="ml">ഫുഡ്
+                                ബ്ലോഗർ</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section id="ctabanner">
+        <h2 class="cta-title">
+            <span class="en">Ready for Fresh Fish?</span>
+            <span class="ml">ഫ്രഷ് മത്സ്യം തയ്യാർ?</span>
+        </h2>
+        <p class="cta-sub">
+            <span class="en">Order now and receive pond-fresh fish within hours. Serving all of Palakkad
+                district.</span>
+            <span class="ml">ഇപ്പോൾ ഓർഡർ ചെയ്ത് ഏതാനും മണിക്കൂറിൽ ഫ്രഷ് മത്സ്യം നേടൂ.</span>
+        </p>
+        <div class="cta-btns">
+            <a href="https://wa.me/919843179686?text=Hello%20Achayans%2C%20I%20want%20to%20order%20fresh%20fish"
+                target="_blank" class="cta-wa">
+                💬 <span class="en">Order on WhatsApp</span><span class="ml">വാട്സ്ആപ്പ് ഓർഡർ</span>
+            </a>
+            <a href="tel:+919843179686" class="cta-call">
+                📞 +91 98431 79686
+            </a>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div style="text-align:center;" class="reveal">
+            <div class="s-tag">📞 <span class="en">Get In Touch</span><span class="ml">ബന്ധപ്പെടൂ</span></div>
+            <h2 class="s-title">
+                <span class="en">Order Fresh Fish<br><span class="accent">From Our Farm</span></span>
+                <span class="ml">ഫ്രഷ് മത്സ്യം<br><span class="accent">ഇന്നേ ഓർഡർ</span></span>
+            </h2>
+            <p class="s-desc" style="margin:14px auto 0;">
+                <span class="en">Visit our farm or place an order — we deliver across Palakkad region.</span>
+                <span class="ml">ഞങ്ങളുടെ ഫാം സന്ദർശിക്കൂ അല്ലെങ്കിൽ ഓർഡർ ചെയ്യൂ.</span>
+            </p>
+        </div>
+
+        <div class="contact-inner">
+            <div class="contact-info-cards reveal">
+                <div class="info-card">
+                    <div class="info-icon">📍</div>
+                    <div>
+                        <div class="info-label"><span class="en">Location</span><span class="ml">സ്ഥാനം</span></div>
+                        <div class="info-val">Kambarathchalla, Kollengode, Palakkad - 678506</div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">📞</div>
+                    <div>
+                        <div class="info-label"><span class="en">Phone / WhatsApp</span><span class="ml">ഫോൺ</span>
+                        </div>
+                        <div class="info-val"><a href="tel:+919843179686"
+                                style="color:var(--accent);text-decoration:none;font-weight:600;">+91 98431 79686</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">📧</div>
+                    <div>
+                        <div class="info-label"><span class="en">Email</span><span class="ml">ഇ-മെയിൽ</span></div>
+                        <div class="info-val">achayansfishfarm@gmail.com</div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🕐</div>
+                    <div>
+                        <div class="info-label"><span class="en">Working Hours</span><span class="ml">സമയം</span></div>
+                        <div class="info-val"><span class="en">Mon – Sun: 8:00 AM – 7:00 PM</span><span
+                                class="ml">തിങ്കൾ – ഞായർ: രാ. 8 – 7</span></div>
+                    </div>
+                </div>
+                <div class="social-row">
+                    <a href="https://www.facebook.com/jobinjames.jobins" target="_blank" class="soc-btn soc-fb">
+                        👥 Facebook
+                    </a>
+                    <a href="https://www.instagram.com/__jobin_james/" target="_blank" class="soc-btn soc-ig">
+                        📸 Instagram
+                    </a>
+                    <a href="https://wa.me/919843179686" target="_blank" class="soc-btn soc-wa">
+                        💬 WhatsApp
+                    </a>
                 </div>
                 <div class="map-wrap">
                     <iframe src="https://maps.google.com/maps?q=Palakkad+Akollengode+Kambarathchall&output=embed"
                         allowfullscreen></iframe>
                 </div>
             </div>
-            <div class="contact-form reveal-right">
-                <h3>Send an Enquiry</h3>
-                <input type="text" placeholder="Your Name" class="form-input">
-                <input type="email" placeholder="Email Address" class="form-input">
-                <input type="tel" placeholder="Phone Number" class="form-input">
-                <textarea rows="3" placeholder="Message / Fish requirement (e.g. 5kg Karimeen)" class="form-input"
-                    style="resize:none"></textarea>
-                <button class="form-submit">📨 Send Message</button>
-                <p class="form-note">We'll reply via WhatsApp or call within 1 hour.</p>
-            </div>
+
+            <!-- <div class="contact-form-wrap reveal">
+      <div class="form-title">
+        <span class="en">Send an Enquiry</span>
+        <span class="ml">ഒരു സന്ദേശം അയക്കൂ</span>
+      </div>
+      <input type="text" class="form-field" placeholder="Your Name / നിങ്ങളുടെ പേര്">
+      <input type="email" class="form-field" placeholder="Email Address / ഇ-മെയിൽ">
+      <input type="tel" class="form-field" placeholder="Phone Number / ഫോൺ">
+      <textarea rows="3" class="form-field" style="resize:none;" placeholder="Message / Fish requirement (e.g. 5kg Karimeen)&#10;സന്ദേശം / ആവശ്യം"></textarea>
+      <button class="form-submit" onclick="submitForm()">
+        📨 <span class="en">Send Message</span><span class="ml">സന്ദേശം അയക്കുക</span>
+      </button>
+      <p class="form-note">
+        <span class="en">We'll reply via WhatsApp or call within 1 hour.</span>
+        <span class="ml">1 മണിക്കൂറിനുള്ളിൽ ഞങ്ങൾ മറുപടി നൽകും.</span>
+      </p>
+    </div> -->
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer>
-        <p>© 2025 <span>Achayans Fish World</span> — Premium Fish Farm in Kambarathchall, Akollengode, Palakkad.
-            Freshness Guaranteed. 🐟</p>
+        <div class="footer-inner">
+            <a href="#hero" class="footer-brand">
+                <div class="footer-brand-mark">🐟</div>
+                <span class="footer-brand-name">Achayans Fish World</span>
+            </a>
+            <div class="footer-copy">
+                © 2025 Achayans Fish World · Kambarathchalla, Palakkad 🌿
+            </div>
+            <div class="footer-links">
+                <a href="#about"><span class="en">About</span><span class="ml">ഞങ്ങൾ</span></a>
+                <a href="#varieties"><span class="en">Varieties</span><span class="ml">ഇനങ്ങൾ</span></a>
+                <a href="#contact"><span class="en">Contact</span><span class="ml">ബന്ധം</span></a>
+            </div>
+        </div>
     </footer>
 
-    <!-- WhatsApp Float -->
+    <!-- WHATSAPP FLOAT -->
     <a href="https://wa.me/919843179686?text=Hello%20Achayans%2C%20I%20want%20to%20order%20fresh%20fish" target="_blank"
         class="wa-float">
-        <i class="ri-whatsapp-line" style="font-size:20px"></i> Order Now
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+            <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.526 5.845L0 24l6.338-1.51A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.67-.5-5.203-1.376l-.37-.22-3.764.897.94-3.657-.244-.387A9.963 9.963 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+        </svg>
+        <span class="en">Order on WhatsApp</span>
+        <span class="ml">വാട്സ്ആപ്പിൽ ഓർഡർ</span>
+        <!-- <span class="en">Order Now</span><span class="ml">ഓർഡർ</span> -->
     </a>
 
-    <!-- Back to Top -->
-    <button id="back-top"><i class="ri-arrow-up-line"></i></button>
+    <!-- BACK TO TOP -->
+    <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // ===== LOADER =====
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-                startCounters();
-            }, 2000);
-        });
+        // ===== THEME =====
+        let isDark = false;
+        function toggleTheme() {
+            isDark = !isDark;
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            document.getElementById('themeIcon').textContent = isDark ? '☀️' : '🌙';
+        }
 
-        // ===== BUBBLES =====
-        (function createBubbles() {
-            const container = document.getElementById('bubblesContainer');
-            for (let i = 0; i < 12; i++) {
-                const b = document.createElement('div');
-                b.className = 'bubble';
-                const size = Math.random() * 80 + 30;
-                b.style.cssText = `width:${size}px;height:${size}px;left:${Math.random() * 100}%;animation-duration:${Math.random() * 20 + 15}s;animation-delay:${Math.random() * -20}s;`;
-                container.appendChild(b);
-            }
-        })();
-
-        // ===== CUSTOM CURSOR =====
-        const dot = document.getElementById('cursorDot');
-        const ring = document.getElementById('cursorRing');
-        let mx = 0, my = 0, rx = 0, ry = 0;
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
-        (function animRing() {
-            rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-            ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-            requestAnimationFrame(animRing);
-        })();
-
-        // ===== HEADER SCROLL =====
-        const header = document.getElementById('mainHeader');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 60);
-            document.getElementById('back-top').classList.toggle('show', window.scrollY > 300);
-        });
+        // ===== LANGUAGE =====
+        let isML = false;
+        function toggleLang() {
+            isML = !isML;
+            document.documentElement.setAttribute('data-lang', isML ? 'ml' : 'en');
+            document.getElementById('langLabel').textContent = isML ? '🇬🇧 English' : '🇮🇳 മലയാളം';
+        }
 
         // ===== MOBILE MENU =====
-        const mobileToggle = document.getElementById('mobileToggle');
-        const mobileNav = document.getElementById('mobileNav');
-        mobileToggle.addEventListener('click', () => mobileNav.classList.toggle('open'));
-        mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+        let menuOpen = false;
+        function toggleMobileMenu() {
+            menuOpen = !menuOpen;
+            document.getElementById('mobileNav').classList.toggle('open', menuOpen);
+            document.getElementById('mobileMenuBtn').textContent = menuOpen ? '✕' : '☰';
+        }
+        function closeMobileMenu() {
+            menuOpen = false;
+            document.getElementById('mobileNav').classList.remove('open');
+            document.getElementById('mobileMenuBtn').textContent = '☰';
+        }
 
-        // ===== SMOOTH SCROLL =====
+        // ===== SCROLL =====
+        window.addEventListener('scroll', () => {
+            const btt = document.getElementById('btt');
+            btt.classList.toggle('show', window.scrollY > 300);
+        });
+
+        // Smooth anchor scroll
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
                 const t = document.querySelector(a.getAttribute('href'));
-                if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 70, behavior: 'smooth' }); }
+                if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 60, behavior: 'smooth' }); }
             });
         });
 
-        // ===== BACK TO TOP =====
-        document.getElementById('back-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        // ===== REVEAL =====
+        const ro = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-        // ===== SCROLL REVEAL =====
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-        }, { threshold: 0.12 });
-        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
-
-        // ===== COUNTER ANIMATION =====
+        // ===== COUNTERS =====
         function startCounters() {
             document.querySelectorAll('[data-count]').forEach(el => {
-                const target = parseInt(el.getAttribute('data-count'));
+                const target = parseInt(el.dataset.count);
                 let current = 0;
-                const step = Math.ceil(target / 40);
-                const timer = setInterval(() => {
+                const step = Math.max(1, Math.ceil(target / 40));
+                const t = setInterval(() => {
                     current = Math.min(current + step, target);
                     el.textContent = current;
-                    if (current >= target) clearInterval(timer);
-                }, 40);
+                    if (current >= target) clearInterval(t);
+                }, 35);
             });
         }
+        setTimeout(startCounters, 2200);
 
-        // ===== SWIPER =====
-        new Swiper('.testimonialSwiper', {
-            loop: true,
-            slidesPerView: 1,
-            spaceBetween: 24,
-            autoplay: { delay: 5000, disableOnInteraction: false },
-            pagination: { el: '.swiper-pagination', clickable: true },
-            breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+        // ===== GALLERY DRAG =====
+        const gs = document.getElementById('galleryScroll');
+        let isDown = false, startX, scrollL;
+        gs.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - gs.offsetLeft; scrollL = gs.scrollLeft; });
+        ['mouseleave', 'mouseup'].forEach(ev => gs.addEventListener(ev, () => isDown = false));
+        gs.addEventListener('mousemove', e => {
+            if (!isDown) return;
+            e.preventDefault();
+            gs.scrollLeft = scrollL - (e.pageX - gs.offsetLeft - startX);
         });
+        document.getElementById('gNext').addEventListener('click', () => gs.scrollBy({ left: 240, behavior: 'smooth' }));
+        document.getElementById('gPrev').addEventListener('click', () => gs.scrollBy({ left: -240, behavior: 'smooth' }));
 
-        // ===== GALLERY DRAG + BUTTONS =====
-        const track = document.getElementById('galleryTrack');
-        let isDown = false, startX, scrollLeft;
-        track.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
-        ['mouseleave', 'mouseup'].forEach(ev => track.addEventListener(ev, () => isDown = false));
-        track.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX); });
+        // ===== FORM =====
+        function submitForm() {
+            const fields = document.querySelectorAll('.form-field');
+            const name = fields[0].value.trim();
+            const phone = fields[2].value.trim();
+            const msg = fields[3].value.trim();
+            if (!name) { fields[0].focus(); return; }
+            const text = `Hello Achayans! I'm ${name}. ${phone ? 'Phone: ' + phone + '. ' : ''}${msg || 'I want to order fresh fish.'}`;
+            window.open(`https://wa.me/919843179686?text=${encodeURIComponent(text)}`, '_blank');
+        }
 
-        document.getElementById('gNext').addEventListener('click', () => track.scrollBy({ left: 280, behavior: 'smooth' }));
-        document.getElementById('gPrev').addEventListener('click', () => track.scrollBy({ left: -280, behavior: 'smooth' }));
+        // ===== SYSTEM THEME DETECT =====
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            isDark = true;
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('themeIcon').textContent = '☀️';
+        }
     </script>
 </body>
 
